@@ -5,13 +5,36 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+
+gem 'mysql2'
 gem 'sqlite3'
 
+gem 'simple_form', "~> 2.1.0"
+gem "faker", "~> 1.1.2"
+gem "twitter-bootstrap-rails"
+gem 'devise'
+
+
+group :development, :test do
+  gem "rspec-rails",        "~> 2.12.0"
+  gem "shoulda-matchers",   "~> 1.4.2"
+  gem 'factory_girl_rails', "~> 4.1.0"
+  gem 'guard-livereload'
+  gem 'database_cleaner'
+end
+
+group :test do
+  gem 'capybara',           "~> 2.0.1"
+  gem 'guard-rspec'
+  gem 'launchy'
+  gem 'turn'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
+  gem 'less-rails'
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes

@@ -7,7 +7,6 @@ gem 'rails', '3.2.11'
 
 
 gem 'mysql2'
-gem 'sqlite3'
 
 gem 'simple_form', "~> 2.1.0"
 gem "faker", "~> 1.1.2"

@@ -3,6 +3,10 @@ ArtisanMarket::Application.routes.draw do
 
   devise_for :customers
 
+  resources :products
+  resources :projects
+  resources :product_categories
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

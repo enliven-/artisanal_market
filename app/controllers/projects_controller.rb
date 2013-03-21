@@ -1,7 +1,9 @@
 class ProjectsController < ApplicationController
 
-  def index
-    @projects = Project.all
+  before_filter :authenticate_customer!
+
+  def index 
+    @projects = Project.where("customer_id=?", current_customer.id)
   end
 
   def show

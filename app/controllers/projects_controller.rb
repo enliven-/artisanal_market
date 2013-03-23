@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
-    @project.customer_id = 1
+    @project.customer_id = current_customer.id
     @project.save
     redirect_to action: :index
   end

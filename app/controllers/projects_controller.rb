@@ -4,10 +4,12 @@ class ProjectsController < ApplicationController
 
   def index 
     @projects = Project.where("customer_id=?", current_customer.id)
+    @customer = current_customer
   end
 
   def show
     @project = Project.find(params[:id])
+    @products = Product.where("project_id=?", @project.id)
   end
 
   def new

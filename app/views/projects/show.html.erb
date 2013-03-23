@@ -1,6 +1,5 @@
 <h3> Project <%=@project.id=%> </h3>
-
-<table>
+<table class="project">
     <tr>
         <td>Project Name: </td><td><%=@project.name=%></td>
     </tr>
@@ -18,5 +17,30 @@
     </tr>
 </table>
 
+<br />
 
+<h4>Products associated with this project</h4>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Summary</th>
+  <% @products.each do |product| %>
+    <tr>
+      <td><%= product.name %></td>
+      <td><%= product.description %></td>
+      <td><%= link_to 'Show', product %></td>
+    </tr>
+  <% end %>
+</table>
 
+<br />
+
+<%= link_to 'New product', new_product_path(project_id: @project.id) %>
+
+<style>
+tr td, tr th{
+    min-width: 150px;
+    padding: 5px;
+    text-align: left;
+}
+</style>

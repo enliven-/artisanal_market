@@ -1,6 +1,6 @@
-<h1>Listing projects</h1>
+<h3>Listing projects for <%= @customer.email =%> </h3>
  
-<table>
+<table class="projects-table">
   <tr>
     <th>Title</th>
     <th>Summary</th>
@@ -19,7 +19,13 @@
   </tr>
 <% end %>
 </table>
- 
+
 <br />
  
 <%= link_to 'New project', new_project_path %>
+
+<style>
+.projects-table tr td{
+    padding: 15px;
+}
+</style>

@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
+    @product.project_id = params[:project_id]
   end
 
   def edit
@@ -26,10 +27,11 @@ class ProductsController < ApplicationController
   end
 
   def create
+    p params
     @product = Product.new(params[:product])
     @product.product_category_id = 1
     @product.save
-    redirect_to action: :index
+    redirect_to controller: :projects, action: :show, id: @product.project_id
   end
 
   def destroy

@@ -7,7 +7,7 @@ gem 'rails', '3.2.11'
 
 
 gem 'mysql2'
-
+gem 'pg'
 gem 'simple_form', "~> 2.1.0"
 gem "faker", "~> 1.1.2"
 gem "twitter-bootstrap-rails"
@@ -27,6 +27,10 @@ group :test do
   gem 'guard-rspec'
   gem 'launchy'
   gem 'turn'
+end
+
+group :production do
+  gem 'pg'
 end
 
 # Gems used only for assets and not required

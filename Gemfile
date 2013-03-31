@@ -12,7 +12,7 @@ gem 'simple_form',          "~> 2.1.0"
 gem "faker",                "~> 1.1.2"
 gem "twitter-bootstrap-rails"
 gem 'devise'
-
+gem "paperclip", "~> 3.0"
 
 group :development, :test do
   gem "rspec-rails",        "~> 2.12.0"

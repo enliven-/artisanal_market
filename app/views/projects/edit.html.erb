@@ -1,5 +1,13 @@
       <div class="row span12 bordered" id="design">
+		  
+		
+		  
         <div class="span2" id="pallete">
+			
+			<%= simple_form_for @project do |f| %>
+			  <%= f.association :artisan, collection: Artisan.all, value_method: :_id, label_method: :email, include_blank: false  %>
+			  <%= f.button :submit %>
+			<% end %>
 
           <div class="menu_ bordered">
             <select id=attr-select>
@@ -72,5 +80,6 @@
           
           <canvas id="canvas"></canvas>
         </div>
+		
         
       </div> <!-- /row -->

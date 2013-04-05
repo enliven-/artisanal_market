@@ -11,6 +11,8 @@ gem 'pg'
 gem 'simple_form',          "~> 2.1.0"
 gem "faker",                "~> 1.1.2"
 gem "twitter-bootstrap-rails"
+gem 'jquery-ui-rails'
+
 gem 'devise'
 gem "paperclip", "~> 3.0"
 
@@ -39,7 +41,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'less-rails'
   gem 'coffee-rails', '~> 3.2.1'
-
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
 

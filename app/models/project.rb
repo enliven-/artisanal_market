@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :description, :name
+  attr_accessible :description, :name, :artisan_id
   
   after_save :notify_artisans
   

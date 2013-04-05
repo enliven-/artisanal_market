@@ -1,6 +1,7 @@
 <%= simple_form_for @project do |f| %>
   <%= f.input :name %>
   <%= f.input :description, as: :text %>
+  <%= f.association :artisan, collection: Artisan.all, value_method: :_id, label_method: :email, include_blank: false  %>
   <%= f.button :submit %>
 <% end %>
 

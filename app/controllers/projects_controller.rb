@@ -20,7 +20,11 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new
+    if customer_signed_in?
+      @project = Project.new(customer_id: current_customer.id)
+    else
+      @project = Project.new(customer_id: current_artisan.id)
+    end
   end
 
   def edit
@@ -38,7 +42,6 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
-    @project.customer_id = current_customer.id
     @project.save
     redirect_to action: :index
   end

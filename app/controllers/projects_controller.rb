@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
-  before_filter :authenticate_customer!
+  before_filter :authenticate_customer!, except: [:index_artisan]
+  before_filter :authenticate_artisan!, only: [:index_artisan]
 
   def index 
     @projects = Project.where("customer_id=?", current_customer.id)
@@ -40,6 +41,9 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.destroy
     redirect_to action: :index
+  end
+  
+  def index_artisan
   end
 
 end

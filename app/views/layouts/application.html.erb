@@ -28,6 +28,16 @@
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>
+			  
+			  <% if customer_signed_in? %>
+			  	<li><%= link_to "Customer sign out", destroy_customer_session_path, method: :delete %>
+			  <% elsif artisan_signed_in? %>
+		  		<li><%= link_to "Artisan sign out", destroy_artisan_session_path, method: :delete %>	
+			  <% else %>
+			  	<li><%= link_to "Customer login", new_customer_session_path %></li>
+  			  	<li><%= link_to "Artisan login", new_artisan_session_path %>
+			  <% end %>
+			    
             </ul>
           </div><!--/.nav-collapse -->
         </div>

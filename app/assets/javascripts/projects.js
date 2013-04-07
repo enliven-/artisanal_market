@@ -3,15 +3,25 @@ $(function() {
     console.log("project.js loading!");
 
     $(".attr").draggable({
-        helper: "clone"
+        helper: "clone",
+        containment: $("#design")
     });
-
-
 
     // $(".attr").click(function(event) {
     //     $(this).attr("id", "img-to-drop");
     // });
-    
+
+
+$('#upload').change(function() {
+    var filename = $(this).val();
+    // var lastIndex = filename.lastIndexOf("\\");
+    // if (lastIndex >= 0) {
+    //     filename = filename.substring(lastIndex + 1);
+    // }
+    $('#filename').val(filename);
+    console.log( $('input#upload').val() );
+});
+
     $("img").css({ 'opacity' : 0.7 })
             .css( "zIndex", 10 );
     $("img").data({
@@ -19,13 +29,28 @@ $(function() {
         'origionalTop': $("img").css('top')
     });
 
+    var reset = "off";
     $("#reset").click(function() {
         $(".pin").remove();
         $(".dropped").remove();
         $(".txt-border").remove();
+        $('#canvas').css("background-image", "url(/tshirt.jpg)" );
+        console.log( $("input#resetvalue").attr("value"));
+        reset_on = $("input#resetvalue").attr("value");
+        $("input#resetvalue").attr("value", "true");
     });
 
 
+    var img_ = $('input#baseimage').attr("value");
+    console.log(img_);
+
+    if (img_=="/" || reset=="on") {
+         $('#canvas').css("background-image", "url(/tshirt.jpg)" );
+    } else {
+        var img_url = "url(" + img_ + " )";
+        console.log("=== " + img_url);
+        $('#canvas').css("background-image",  img_url);
+    }
 
     var txtboxid = 1;
 
@@ -270,10 +295,16 @@ $(function() {
 
 
 
-
+    var project_id = $("#projectid").attr("value");
     $( "#canvas_container" ).droppable({
         drop: function( event, ui ) {
-                $(ui.helper).addClass("dropped");
+                $(ui.helper).addClass("dropped").draggable({
+                                                        stop: function(event, ui) {
+                                                                $.cookie(project_id+'top',  $(ui.helper).css("top"));
+                                                                $.cookie(project_id+'left', $(ui.helper).css("left"));
+                                                                console.log("stopped at " + $.cookie(project_id+'top') +  " : " + $.cookie(project_id+'left') );
+                                                            }
+                                                        });
                 var result = $(ui.helper).hasClass("attr");
                 $(ui.helper).removeClass("ui-draggable-dragging");
 
@@ -291,6 +322,7 @@ $(function() {
 
                                                 $("#selected-img").removeAttr("id");
                                             }
+
                                 })
                                     .click(function() {
                                         if ( $(this).is('.ui-draggable-dragging') ) {
@@ -325,5 +357,10 @@ $(function() {
     $("#canvas_container :not(img)").click(function() {
         $("#selected-img").removeAttr("id");
     });
+
+
+
+
+
 
 });

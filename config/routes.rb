@@ -4,7 +4,13 @@ ArtisanMarket::Application.routes.draw do
   devise_for :customers
 
   resources :products
-  resources :projects
+  resources :projects  do
+      member do 
+        get :design
+        put :design
+      end
+  end
+  
   resources :product_categories
 
   root to: 'projects#index'

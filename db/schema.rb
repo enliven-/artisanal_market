@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130321034849) do
+ActiveRecord::Schema.define(:version => 20130407045904) do
 
   create_table "artisans", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -68,9 +68,12 @@ ActiveRecord::Schema.define(:version => 20130321034849) do
     t.string   "name"
     t.text     "description"
     t.integer  "customer_id"
-    t.integer  "artisan_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "base_image_file_name"
+    t.string   "base_image_content_type"
+    t.integer  "base_image_file_size"
+    t.datetime "base_image_updated_at"
   end
 
 end

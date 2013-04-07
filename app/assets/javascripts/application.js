@@ -33,7 +33,4 @@ break;case 34:t.datepicker._adjustDate(e.target,e.ctrlKey?+t.datepicker._get(o,"
 
 //= require twitter/bootstrap
 
-//= require project
-
-
 //= require_tree .

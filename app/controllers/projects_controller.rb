@@ -20,6 +20,19 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def design
+    @project = Project.find(params[:id])
+    @project.update_attributes(params[:project])
+    @new_image_url = @project.base_image.url
+    render template: "projects/design"
+  end
+
+  def save_design
+    @project = Project.find(params[:id])
+    
+  end
+
+
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])

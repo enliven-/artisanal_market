@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
-  attr_accessible :description, :name
-  
+  attr_accessible :description, :name, :base_image
+  has_attached_file :base_image, :styles => { :medium => "600x600>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   after_save :notify_artisans
   
   belongs_to :customer

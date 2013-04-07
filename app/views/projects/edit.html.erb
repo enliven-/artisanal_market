@@ -3,12 +3,12 @@
 		
 		  
         <div class="span2" id="pallete">
-			
-			<%= simple_form_for @project do |f| %>
-			  <%= f.association :artisan, collection: Artisan.all, value_method: :_id, label_method: :email, include_blank: false  %>
-			  <%= f.button :submit %>
+			<% if current_customer %>
+				<%= simple_form_for @project do |f| %>
+				  <%= f.association :artisan, collection: Artisan.all, value_method: :_id, label_method: :email, include_blank: false  %>
+				  <%= f.button :submit %>
+				<% end %>
 			<% end %>
-
           <div class="menu_ bordered">
             <select id=attr-select>
               <option value="1">Patterns</option>

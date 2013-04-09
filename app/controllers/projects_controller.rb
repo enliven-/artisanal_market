@@ -23,13 +23,16 @@ class ProjectsController < ApplicationController
   def design
     @project = Project.find(params[:id])
     @project.update_attributes(params[:project])
+    @project.save
     @new_image_url = @project.base_image.url
+    p params
     render template: "projects/design"
   end
 
   def save_design
     @project = Project.find(params[:id])
-    
+    @project.save
+    render template: "projects/design"
   end
 
 

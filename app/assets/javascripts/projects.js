@@ -41,11 +41,12 @@ $('#upload').change(function() {
     });
 
 
-    var img_ = $('input#baseimage').attr("value");
-    console.log(img_);
-
+    var img_ = $('#baseimage').attr("value");
+    console.log(img_ + "----");
+    console.log("----xxxxxx--------");
     if (img_=="/" || reset=="on") {
-         $('#canvas').css("background-image", "url(/tshirt.jpg)" );
+        console.log("baseimage");
+        $('#canvas').css("background-image", "url(/tshirt.jpg)" );
     } else {
         var img_url = "url(" + img_ + " )";
         console.log("=== " + img_url);

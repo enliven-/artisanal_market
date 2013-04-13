@@ -1,17 +1,9 @@
 class ProjectsController < ApplicationController
 
-  # before_filter :authenticate_customer!, except: [:index_artisan]
-  before_filter :authenticate_artisan!, only: [:index_artisan]
+  before_filter :authenticate_user!
 
   def index 
-    if customer_signed_in?
-      @projects = current_customer.projects
-      @user = current_customer
-    else
-      @projects = current_artisan.projects
-      @user = current_artisan
-    end
-    
+      @projects = current_user.projects
   end
 
   def show
@@ -20,11 +12,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    if customer_signed_in?
-      @project = Project.new(customer_id: current_customer.id)
-    else
-      @project = Project.new(customer_id: current_artisan.id)
-    end
+     @project = Project.new(user_id: current_user.id)
   end
 
   def edit

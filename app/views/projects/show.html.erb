@@ -10,7 +10,7 @@
 		<%= image_tag @project.file.url %>
 	</tr>
     <tr>
-       <td>Customer:</td> <td><%= @project.customer.email %></td>
+       <td>Customer:</td> <td><%= @project.user.name %></td>
     </tr>
     <tr>
         <td>Last Updated At:</td> <td><%=@project.updated_at=%>

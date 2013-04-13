@@ -29,13 +29,10 @@
               <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>
 			  
-			  <% if customer_signed_in? %>
-			  	<li><%= link_to "Customer sign out", destroy_customer_session_path, method: :delete %>
-			  <% elsif artisan_signed_in? %>
-		  		<li><%= link_to "Artisan sign out", destroy_artisan_session_path, method: :delete %>	
+			  <% if user_signed_in? %>
+			  	<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %>	
 			  <% else %>
-			  	<li><%= link_to "Customer login", new_customer_session_path %></li>
-  			  	<li><%= link_to "Artisan login", new_artisan_session_path %>
+			  	<li><%= link_to "Login", new_user_session_path %></li>
 			  <% end %>
 			    
             </ul>

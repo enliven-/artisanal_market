@@ -5,8 +5,7 @@ class Project < ActiveRecord::Base
   
   after_save :notify_artisans
   
-  belongs_to :customer
-  belongs_to :artisan
+  belongs_to :user
   
   has_many :products
   

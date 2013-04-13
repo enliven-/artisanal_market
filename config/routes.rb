@@ -1,13 +1,11 @@
 ArtisanMarket::Application.routes.draw do
+  devise_for :users
+
   get "pages/home"
 
   get "pages/about"
 
   get "pages/contact"
-
-  devise_for :artisans
-
-  devise_for :customers
 
   resources :products
   resources :projects do

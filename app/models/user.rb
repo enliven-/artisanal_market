@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :name, :customer_id, :artisan_id
     
   has_many :projects
+  has_many :products
     
   scope :customers, where(role: CUSTOMER)
   scope :artisans, where(role: ARTISAN)

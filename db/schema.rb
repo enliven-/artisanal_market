@@ -31,7 +31,8 @@ ActiveRecord::Schema.define(:version => 20130413033858) do
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "user_id"
+    t.integer  "customer_id"
+    t.integer  "artisan_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

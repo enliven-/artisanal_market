@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_filter :authenticate_user!
 
   def index 
-      @projects = current_user.projects
+    @projects = Project.where("#{current_user.role}_id =?", current_user.id)
   end
 
   def show
@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-     @project = Project.new(user_id: current_user.id)
+    @project = Project.new()
   end
 
   def edit
@@ -30,6 +30,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
+    @project.customer = current_user
     @project.save
     redirect_to action: :index
   end

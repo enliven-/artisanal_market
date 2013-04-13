@@ -1,7 +1,7 @@
 <%= simple_form_for @project, html: { multipart: true } do |f| %>
   <%= f.input :name %>
   <%= f.input :description, as: :text %>
-  <%= f.association :user, collection: User.artisans, value_method: :_id, label_method: :name, include_blank: false  %>
+  <%= f.association :artisan, collection: User.artisans, value_method: :_id, label_method: :name, include_blank: false  %>
   <%= f.input :file %>
   <%= f.button :submit %>
 <% end %>

@@ -1,19 +1,17 @@
 ArtisanMarket::Application.routes.draw do
+  
   devise_for :users
 
   get "pages/home"
-
   get "pages/about"
-
   get "pages/contact"
 
   resources :products
-  resources :projects do
-    collection do
-      get :index_artisan
-    end
-  end
+  resources :projects
   resources :product_categories
+  resources :palettes
+  resources :attribute_layers
+  resources :attributes
 
   root to: 'pages#home'
 

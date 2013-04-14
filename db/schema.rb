@@ -11,17 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413110041) do
+ActiveRecord::Schema.define(:version => 20130414070020) do
 
-  create_table "palette_categories", :force => true do |t|
+  create_table "attribute_layers", :force => true do |t|
     t.string   "label"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "palette_id"
+    t.integer  "attribute_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "attributes", :force => true do |t|
+    t.string   "label"
+    t.integer  "attribute_layer_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "attr_img_file_name"
+    t.string   "attr_img_content_type"
+    t.integer  "attr_img_file_size"
+    t.datetime "attr_img_updated_at"
   end
 
   create_table "palette_categories_product_categories", :force => true do |t|
     t.integer "palette_category_id"
     t.integer "product_category_id"
+  end
+
+  create_table "palettes", :force => true do |t|
+    t.string   "label"
+    t.integer  "artisan_id"
+    t.integer  "attribute_layer_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "product_categories", :force => true do |t|

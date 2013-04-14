@@ -1,0 +1,2 @@
+class AttributeLayersController < ApplicationController
+end

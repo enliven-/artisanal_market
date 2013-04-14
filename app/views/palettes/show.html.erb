@@ -1,13 +1,6 @@
       <div class="row span12 bordered" id="design">
-		  
-		
-		  
         <div class="span2" id="pallete">
-			
-				<%= simple_form_for @project do |f| %>
-				  <%= f.input :file %>
-				  <%= f.button :submit %>
-				<% end %>
+
           <div class="menu_ bordered">
             <select id=attr-select>
               <option value="1">Patterns</option>
@@ -75,10 +68,16 @@
           <button class="btn pull-left" id="reset">Reset</button>
           <button class="btn pull-left" id="remove-img">Remove Image</button>
           <button class="btn pull-left" id="switch">Switch User</button>
-<input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
-          
-          <canvas id="canvas"></canvas>
+          <%= form_for @palette, :url => { action: :update }, :html => { :multipart => true } do |form| %>
+            <%= form.file_field :base_image %>
+            <%= form.button "Upload Image" %>
+
+          <% end %>
+
+
+          <button class="btn pull-left" id="save-project">Save Project</button>
+
+          <canvas id="canvas">
+          </canvas>
         </div>
-		
-        
       </div> <!-- /row -->

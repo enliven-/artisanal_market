@@ -12,6 +12,7 @@ ArtisanMarket::Application.routes.draw do
   resources :palettes
   resources :attribute_layers
   resources :attributes
+  resources :catalogues
 
   root to: 'pages#home'
 

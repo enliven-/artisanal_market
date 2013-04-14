@@ -1,9 +1,7 @@
 class PalettesController < ApplicationController
 
   def index
-    # @palettets = Palette.where("#{current_user.role}_id =?", current_user.id)
-    @palettes = Palette.all
-
+    @palettes = Palette.where("#{current_user.role}_id =?", current_user.id)
   end
 
   def show
@@ -18,10 +16,16 @@ class PalettesController < ApplicationController
     @palette = Palette.find(params[:id])
   end
 
+  def create
+    @palette = Palette.new(params[:palette])
+    @palette.artisan = current_user
+    @palette.save
+    redirect_to edit_palette_path(@palette)
+  end
+
   def update
     @palette = Palette.find(params[:id])
     @attribute_layer = @palette.attribute_layer.find()
-
   end
 
 end

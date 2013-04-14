@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414070020) do
+ActiveRecord::Schema.define(:version => 20130414082459) do
 
   create_table "attribute_layers", :force => true do |t|
     t.string   "label"
@@ -32,6 +32,15 @@ ActiveRecord::Schema.define(:version => 20130414070020) do
     t.datetime "attr_img_updated_at"
   end
 
+  create_table "catalogues", :force => true do |t|
+    t.string   "label"
+    t.text     "description"
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "palette_categories_product_categories", :force => true do |t|
     t.integer "palette_category_id"
     t.integer "product_category_id"
@@ -40,13 +49,16 @@ ActiveRecord::Schema.define(:version => 20130414070020) do
   create_table "palettes", :force => true do |t|
     t.string   "label"
     t.integer  "artisan_id"
+    t.integer  "product_category_id"
     t.integer  "attribute_layer_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "product_categories", :force => true do |t|
     t.string   "label"
+    t.integer  "palette_id"
+    t.integer  "product_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -57,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20130414070020) do
     t.integer  "project_id"
     t.integer  "product_category_id"
     t.integer  "user_id"
+    t.integer  "catalogue_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end

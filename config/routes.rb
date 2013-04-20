@@ -1,5 +1,8 @@
 ArtisanMarket::Application.routes.draw do
   
+  resources :attribute_layers
+
+
   resources :attributes
 
 

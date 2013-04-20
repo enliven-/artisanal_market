@@ -3,19 +3,23 @@
 		
 		  
         <div class="span2" id="pallete">
-			
 				<%= simple_form_for @project do |f| %>
 				  <%= f.input :file %>
 				  <%= f.button :submit %>
 				<% end %>
           <div class="menu_ bordered">
-            <select id=attr-select>
+			  
+			  <%= select_tag :palette, options_from_collection_for_select(@attribute_layers, :id, :label), include_blank: false, id: 'attr-select' %>
+			  
+            <!-- <select id=attr-select>
               <option value="1">Patterns</option>
               <option value="2">Stitch type</option>
               <option value="3">Mirror Work</option>
               <option value="4">Button</option>
-            </select>
+            </select> -->
 
+				<!-- TODO: VIKSIT - Loopover the attributes we get from above selection: JS -->
+				
             <div id=choice1 class=choice>
               <img src="/pictures/Patterns/pattern1.jpg" _width="90px" class="attr">
               <img src="/pictures/Patterns/pattern3.jpg" _width="90px" class="attr">

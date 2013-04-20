@@ -1,6 +1,9 @@
 class AttributeLayersController < ApplicationController
   # GET /attribute_layers
   # GET /attribute_layers.json
+  
+  before_filter :authenticate_user!
+  
   def index
     @attribute_layers = AttributeLayer.all
 

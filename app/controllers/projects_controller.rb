@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+    @attribute_layers = User.find(@project.artisan_id).palette.artisan_layers
   end
 
   def update

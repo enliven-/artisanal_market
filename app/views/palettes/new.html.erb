@@ -1,5 +1,7 @@
 <%= simple_form_for @palette, html: { multipart: true } do |f| %>
   <%= f.input :label %>
+  <%= f.association :product_category, collection: ProductCategory.all, value_method: :_id, label_method: :label, include_blank: false  %> 
+  
   <%= f.button :submit %>
   
 <% end %>

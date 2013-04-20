@@ -1,7 +1,9 @@
 class PalettesController < ApplicationController
 
+before_filter :authenticate_user!
+
   def index
-    @palettes = Palette.where("#{current_user.role}_id =?", current_user.id)
+    @palettes = Palette.where(user_id: current_user.id)
   end
 
   def show
@@ -9,7 +11,7 @@ class PalettesController < ApplicationController
   end
 
   def new
-    @palette = Palette.new()
+    @palette = Palette.new
   end
 
   def edit
@@ -18,7 +20,7 @@ class PalettesController < ApplicationController
 
   def create
     @palette = Palette.new(params[:palette])
-    @palette.artisan = current_user
+    @palette.user = current_user
     @palette.save
     redirect_to edit_palette_path(@palette)
   end

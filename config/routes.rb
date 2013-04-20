@@ -1,5 +1,8 @@
 ArtisanMarket::Application.routes.draw do
   
+  resources :attributes
+
+
   devise_for :users
 
   get "pages/home"

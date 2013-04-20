@@ -3,5 +3,6 @@
 FactoryGirl.define do
   factory :attribute do
     label "MyString"
+    attr_img "MyString"
   end
 end

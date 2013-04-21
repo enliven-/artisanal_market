@@ -17,10 +17,12 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
-    @attribute_layers = User.find(@project.artisan_id).palette.artisan_layers
-    @attribute = []
-    @attribute_layers.each do |al|
-      @attribute += al.attributes
+    if @project.artisan_assigned?
+      @attribute_layers = User.find(@project.artisan_id).palettes.first.attribute_layers
+      @attribute = []
+      @attribute_layers.each do |al|
+        @attribute += al.attributes
+      end
     end
   end
 
@@ -44,5 +46,8 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.destroy
     redirect_to action: :index
+  end
+  
+  def attribute_layer
   end
 end

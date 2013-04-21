@@ -10,6 +10,10 @@ class Project < ActiveRecord::Base
   
   has_many :products
   
+  def artisan_assigned?
+    self.artisan_id ? true : false
+  end
+  
   private
   
   def notify_artisans

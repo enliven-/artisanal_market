@@ -13,7 +13,11 @@ ArtisanMarket::Application.routes.draw do
   get "pages/contact"
 
   resources :products
-  resources :projects
+  resources :projects do
+    member do 
+      post :attribute_layer
+    end
+  end
   resources :product_categories
   resources :palettes
   resources :attribute_layers

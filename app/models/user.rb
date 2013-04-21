@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
     
   has_many :projects
   has_many :products
+  has_many :palettes
     
   scope :customers, where(role: CUSTOMER)
   scope :artisans, where(role: ARTISAN)

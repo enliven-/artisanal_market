@@ -1,5 +1,7 @@
 class Attribute < ActiveRecord::Base
-  attr_accessible :label, :attr_img
+  attr_accessible :label, :attr_img, :attribute_layer_id
+  
+  attr_accessor :attr_img_file_name
 
   belongs_to  :attribute_layer
 

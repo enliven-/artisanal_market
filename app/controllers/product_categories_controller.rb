@@ -1,6 +1,6 @@
 class ProductCategoriesController < ApplicationController
   
-  before_filter :athenticate_user!
+  before_filter :authenticate_user!
   
   def index
     @product_categories = ProductCategory.all
@@ -11,16 +11,16 @@ class ProductCategoriesController < ApplicationController
   end
 
   # def new
- #    @product_category = ProductCategory.new
- #  end
- # 
- #  def edit
- #    @product_category = ProductCategory.find(params[:id])
- #  end
- # 
- #  def create
- #    @product_category = ProductCategory.new(params[:product_category])
- #  end
+#     @product_category = ProductCategory.new
+#   end
+#  
+#   def edit
+#     @product_category = ProductCategory.find(params[:id])
+#   end
+#  
+#   def create
+#     @product_category = ProductCategory.new(params[:product_category])
+#   end
 
   
 end

@@ -8,7 +8,13 @@ before_filter :authenticate_user!
 
   def show
     @palette = Palette.find(params[:id])
+    @attribute_layers = @palette.attribute_layers
+    @attributes = []
+    @attribute_layers.each do |layer|
+      @attributes += layer.attributes
+    end
   end
+
 
   def new
     @palette = Palette.new

@@ -42,17 +42,18 @@ class AttributesController < ApplicationController
   # POST /attributes
   # POST /attributes.json
   def create
-    @attribute = Attribute.new(params[:attribute])
+    # @attribute = Attribute.new(params[:attribute])
 
-    respond_to do |format|
-      if @attribute.save
-        format.html { redirect_to @attribute, notice: 'Attribute was successfully created.' }
-        format.json { render json: @attribute, status: :created, location: @attribute }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @attribute.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @attribute.save
+    #     format.html { redirect_to @attribute, notice: 'Attribute was successfully created.' }
+    #     format.json { render json: @attribute, status: :created, location: @attribute }
+    #   else
+    #     format.html { render action: "new" }
+    #     format.json { render json: @attribute.errors, status: :unprocessable_entity }
+    #   end
+    # end
+    @attribute = Attribute.create(params[:attribute])
   end
 
   # PUT /attributes/1

@@ -4,33 +4,20 @@
         
 
         <div class="span2" id="pallete">
+          <div class="menu_ bordered">
+        
+          <%= select_tag :palette, options_from_collection_for_select(@attribute_layers, :id, :label), include_blank: false, id: 'attr-select' %>
+          
 
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-        <div class="span9 unselectable" id="canvas_container">
-          <button class="btn pull-left" id="reset">Reset</button>
-          <button class="btn pull-left" id="remove-img">Remove Image</button>
-          <button class="btn pull-left" id="switch">Switch User</button>
-          <%= form_for @palette, :url => { action: :update }, :html => { :multipart => true } do |form| %>
-            <%= form.file_field :base_image %>
-            <%= form.button "Upload Image" %>
-
+          <% @attribute_layers.each do |attribute_layer| %>
+          <div id="choice<%= attribute_layer.id %>" class="choice">
           <% end %>
 
+          <% @attributes.each do |attribute| %>
+          here
+          <%= image_tag attribute.attr_img.url(:thumb) %>
+          <% end %>
 
-          <button class="btn pull-left" id="save-project">Save Project</button>
-
-          <canvas id="canvas">
-          </canvas>
         </div>
+
       </div> <!-- /row -->

@@ -5,5 +5,5 @@ class Attribute < ActiveRecord::Base
 
   belongs_to  :attribute_layer
 
-  has_attached_file :attr_img, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :attr_img, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 end

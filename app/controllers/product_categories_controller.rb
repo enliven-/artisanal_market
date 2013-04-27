@@ -10,17 +10,25 @@ class ProductCategoriesController < ApplicationController
     @product_category = ProductCategory.find(params[:id])
   end
 
-  # def new
-#     @product_category = ProductCategory.new
-#   end
-#  
-#   def edit
-#     @product_category = ProductCategory.find(params[:id])
-#   end
-#  
-#   def create
-#     @product_category = ProductCategory.new(params[:product_category])
-#   end
+  def new
+    @product_category = ProductCategory.new
+  end
+ 
+  def edit
+    @product_category = ProductCategory.find(params[:id])
+  end
+ 
+  def create
+    p "----------------------------------------------------------------"
+    p params[:product_category]
+    @product_category = ProductCategory.create(params[:product_category])
+    redirect_to action: :index
+  end
 
+  def destroy
+    @product_category = ProductCategory.find(params[:id])
+    @product_category.destroy
+    redirect_to action: :index
+  end
   
 end

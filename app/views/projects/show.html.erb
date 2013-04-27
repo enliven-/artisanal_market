@@ -22,7 +22,10 @@
 
 <br />
 
-<h4>Products associated with this project</h4>
+<%= link_to 'New product', new_product_path(project_id: @project.id) %>
+
+<br /><br /><br />
+<h4>Products associated with this Project</h4>
 <table>
   <tr>
     <th>Name</th>
@@ -36,14 +39,27 @@
   <% end %>
 </table>
 
-<br />
+<br /><br /><br />
 
-<%= link_to 'New product', new_product_path(project_id: @project.id) %>
+
+<h4>Palettes associated with this Project</h4>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Link</th>
+  <% @palettes.each do |palette| %>
+    <tr>
+      <td><%= palette.label %></td>
+      <td><%= link_to 'Show', palette %></td>
+    </tr>
+  <% end %>
+</table>
+
 
 <style>
 tr td, tr th{
     min-width: 150px;
-    padding: 5px;
+    padding: 2px;
     text-align: left;
 }
 </style>

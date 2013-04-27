@@ -1,4 +1,4 @@
-<h3>Listing projects for <%= current_user.name %> </h3>
+<h4>Listing projects for <%= current_user.name %> </h4>
  
 <table class="projects-table">
   <tr>
@@ -21,12 +21,11 @@
 <% end %>
 </table>
 
-<br />
-<%= link_to 'Palettes', palettes_path %>
+<br /> <br />
+<% if user_signed_in? %>
+  <li><%= link_to 'New project', new_project_path %></li>
+<% end %>
 
-<br />
-<br />  
-<%= link_to 'New project', new_project_path %>
 
 <style>
 .projects-table tr td{

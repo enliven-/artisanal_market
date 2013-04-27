@@ -9,15 +9,15 @@ before_filter :authenticate_user!
   def show
     @palette = Palette.find(params[:id])
     @attribute_layers = @palette.attribute_layers
-    @attributes = []
-    @attribute_layers.each do |layer|
-      @attributes += layer.attributes
-    end
+    @ids = @attribute_layers.map { |layer| layer.id }
+    @attributes = Attribute.where("attribute_layer_id=?", 1)
   end
 
 
   def new
     @palette = Palette.new
+    @product_category = ProductCategory.new
+
   end
 
   def edit
@@ -34,6 +34,12 @@ before_filter :authenticate_user!
   def update
     @palette = Palette.find(params[:id])
     @attribute_layer = @palette.attribute_layer.find()
+  end
+
+  def destroy
+    @palette = Palette.find(params[:id])
+    @palette.destroy
+    redirect_to action: :index
   end
 
 end

@@ -26,20 +26,16 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-			  
-			  <% if user_signed_in? %>
-			  	<% if current_user.artisan? %>
-					<li><%= link_to "Create Product", new_product_path %></li>
-					<li><%= link_to "Create Palette", new_palette_path %></li>
-				  	<li><%= link_to "Create Attribute Layer", new_attribute_layer_path %></li>
-				  	<li><%= link_to "Add attribute", new_attribute_path %></li>
-				<% end %>
-			  	<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %>	
-			  <% else %>
-			  	<li><%= link_to "Login", new_user_session_path %></li>
-			  <% end %>
+
+      			  <% if user_signed_in? %>
+                <% if current_user.artisan? %>
+                  <li><%= link_to 'Projects', projects_path %></li>
+                  <li><%= link_to 'Palettes', palettes_path %></li>
+                <% end %>
+                <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+      			  <% else %>
+      			  	<li><%= link_to "Login", new_user_session_path %></li>
+      			  <% end %>
 			    
             </ul>
           </div><!--/.nav-collapse -->

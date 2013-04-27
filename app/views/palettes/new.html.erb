@@ -1,10 +1,31 @@
+
+
 <%= simple_form_for @palette, html: { multipart: true } do |f| %>
-  <%= f.input :label %>
-  <%= f.association :product_category, collection: ProductCategory.all, value_method: :_id, label_method: :label, include_blank: false  %> 
   
+  <%= f.input :label %>
+  <%= f.association :product_category, 
+                    collection: ProductCategory.all, 
+                    value_method: :_id, 
+                    label_method: :label %>
   <%= f.button :submit %>
+
+<% end %>
+
+<%= simple_form_for @product_category, html: { multipart: true }, defaults: { input_html: { class: 'product_category' } } do |f| %>
+  
+  <%= f.input  :label, input_html: { class: "category_value" } %>
+  <%= f.button :submit, id: "create_category" %>
+
   
 <% end %>
+
+<input type="text" id="datadistancetype" />
+<select name="distancetype" id="distancetype">
+      <option value="0">... Select ...</option>
+      <option value="min">Min</option>
+      <option value="max">Max</option>
+  </select>
+
 
 <style>
 textarea, input {
@@ -12,3 +33,66 @@ textarea, input {
     width: 400px;
 }
 </style>
+
+<script>
+$(document).ready(function() {
+
+    $("select").append($("<option></option>").attr("value", -1).text("Create New Category"));
+    $("#new_product_category").hide();
+    $("#palette_product_category_id").on("change", function() {
+        if(this.selectedIndex == this.options.length-1) {
+            $("#new_product_category").show();
+            return false;
+        }
+        $("#new_product_category").hide();
+    });
+
+
+
+    $("#create_category").click(function(event){
+      // event.preventDefault();
+      console.log($("#new_product_category"));
+      console.log($("#new_product_category").attr('action'));
+      console.log($("#new_product_category").serialize());
+      // var value = $(".category_value").val();
+      var valuesToSubmit = $("#new_product_category").serialize();
+      $.ajax({
+        type: 'POST',
+        url: $("#new_product_category").attr('action'),
+        data: valuesToSubmit,
+        // dataType: "JSON",
+        success: function(data){
+          var value = $(".category_value").val();
+          console.log("value: " + value);
+
+          // var index = $("#palette_product_category_id").children().length-3;
+          // console.log(index);
+          // console.log($("#palette_product_category_id options:eq("+index+")"));
+          // $("#palette_product_category_id options:eq("+index+")").prop('selected', true);
+          $("#palette_product_category_id").attr("value", 1);
+          $("#new_product_category").hide();
+
+        }
+      });
+
+      // $("#new_product_category").trigger('submit.rails');
+      return false;
+    });
+
+$(function()
+  {
+      $("#datadistancetype").blur(function()
+                                    {
+     // alert("Yahoo");
+      var t=$("#datadistancetype").val();
+       alert(t);
+         if(t=="min" || t=="max")
+            $("#distancetype").attr("value",t);
+               });
+  });
+
+
+});
+  
+
+</script>

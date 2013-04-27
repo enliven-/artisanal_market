@@ -44,7 +44,7 @@ class AttributeLayersController < ApplicationController
   # POST /attribute_layers.json
   def create
     @attribute_layer = AttributeLayer.new(params[:attribute_layer])
-
+    puts "---------------------------------------------"
     respond_to do |format|
       if @attribute_layer.save
         format.html { redirect_to @attribute_layer, notice: 'Attribute layer was successfully created.' }

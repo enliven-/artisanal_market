@@ -4,20 +4,24 @@
         
 
         <div class="span2" id="pallete">
+          <%= @palette.label %>
+
           <div class="menu_ bordered">
-        
-          <%= select_tag :palette, options_from_collection_for_select(@attribute_layers, :id, :label), include_blank: false, id: 'attr-select' %>
+
+            <%= select_tag :palette, options_from_collection_for_select(@attribute_layers, :id, :label), include_blank: false, id: 'attr-select' %>
           
 
-          <% @attribute_layers.each do |attribute_layer| %>
-          <div id="choice<%= attribute_layer.id %>" class="choice">
-          <% end %>
 
-          <% @attributes.each do |attribute| %>
-          here
-          <%= image_tag attribute.attr_img.url(:thumb) %>
-          <% end %>
+              <% @attributes.each do |attribute| %>
+              <%= image_tag attribute.attr_img.url(:thumb), class: "attr" %>
+              <%= attribute.label %>
+              <% end %>
 
+            </div>
+
+          </div>
         </div>
-
+        <div class="span9" id="canvas_container">
+        <%= link_to 'New Attribute', new_attribute_path %>
+        </div>
       </div> <!-- /row -->

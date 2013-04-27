@@ -2,9 +2,8 @@
  
 <table class="projects-table">
   <tr>
-    <th>Title</th>
-    <th>Summary</th>
-    <th>File</h1>
+    <th>Palette Name</th>
+    <th>Product Category</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,6 +12,8 @@
 <% @palettes.each do |palette| %>
   <tr>
     <td><%= palette.label %></td>
+    <td><%= palette.product_category.label %></td>
+
     <td><%= link_to 'Show', palette %></td>
     <td><%= link_to 'Edit', edit_palette_path(palette) %></td>
     <td><%= link_to 'Remove', palette, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -22,6 +23,9 @@
 
 <br />
 <%= link_to 'New Palette', new_palette_path %>
+
+
+
 
 <style>
 .projects-table tr td{

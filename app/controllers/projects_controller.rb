@@ -7,8 +7,10 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project  = Project.find(params[:id])
     @products = Product.where("project_id=?", @project.id)
+    @product_category_ids = @products.map { |product| product.product_category_id }
+    @palettes = Palette.where("product_category_id=?", @product_category_ids)
   end
 
   def new

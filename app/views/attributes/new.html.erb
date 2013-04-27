@@ -4,6 +4,7 @@
 <%= form_for @attribute, :url => attributes_path, :html => { :multipart => true } do |form| %>
   <%= form.text_field :label %>
   <%= form.file_field :attr_img %>
+  <%= form.select(:attribute_layer_id, [1,2,3,4]) %>
   <%= form.button :submit %>
 <% end %>
 

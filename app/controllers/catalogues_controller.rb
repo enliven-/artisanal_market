@@ -17,6 +17,7 @@ class CataloguesController < ApplicationController
 
   def edit
     @catalogue = Catalogue.find(params[:id])
+    @products  = Product.where("user_id =?", current_user.id)
   end
 
   def update

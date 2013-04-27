@@ -27,10 +27,13 @@ class AttributesController < ApplicationController
   # GET /attributes/new.json
   def new
     @attribute = Attribute.new
+    @attribute_layers = []
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @attribute }
+    palettes = Palette.where(user_id: current_user.id)
+    palettes.each do |palette|
+      palette.attribute_layers.each do |layer|
+        @attribute_layers << layer
+      end
     end
   end
 

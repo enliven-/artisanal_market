@@ -10,7 +10,7 @@ before_filter :authenticate_user!
     @palette = Palette.find(params[:id])
     @attribute_layers = @palette.attribute_layers
     @ids = @attribute_layers.map { |layer| layer.id }
-    @attributes = Attribute.where("attribute_layer_id=?", 1)
+    @attributes = Attribute.all.select {|attr| @ids.include?(attr.id) }
   end
 
 

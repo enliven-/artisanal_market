@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :projects
   has_many :products
   has_many :palettes
-  has_one  :catalogue
+  has_many :catalogues
     
   scope :customers, where(role: CUSTOMER)
   scope :artisans, where(role: ARTISAN)
@@ -25,7 +25,6 @@ class User < ActiveRecord::Base
     true if self.role == ARTISAN
   end
 
-  def init_catalogue
 
 
   

@@ -1,5 +1,5 @@
 class Catalogue < ActiveRecord::Base
-  attr_accessible :label, :description
+  attr_accessible :label, :description, :product_ids
 
   belongs_to :user
 

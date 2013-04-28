@@ -1,0 +1,11 @@
+<h1>Edit attribute</h1>
+
+
+<%= form_for @attribute, :url => attributes_path, :html => { :multipart => true } do |form| %>
+  <%= form.text_field :label %>
+  <%= form.file_field :attr_img %>
+  <%= form.button :submit %>
+<% end %>
+
+<%= link_to 'Show', @attribute %> |
+<%= link_to 'Back', attributes_path %>

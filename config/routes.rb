@@ -1,13 +1,30 @@
 ArtisanMarket::Application.routes.draw do
-  devise_for :artisans
+  
+  resources :attribute_layers
 
-  devise_for :customers
+
+  resources :attributes
+
+
+  devise_for :users
+
+  get "pages/home"
+  get "pages/about"
+  get "pages/contact"
 
   resources :products
-  resources :projects
+  resources :projects do
+    member do 
+      post :attribute_layer
+    end
+  end
   resources :product_categories
+  resources :palettes
+  resources :attribute_layers
+  resources :attributes
+  resources :catalogues
 
-  root to: 'projects#index'
+  root to: 'pages#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

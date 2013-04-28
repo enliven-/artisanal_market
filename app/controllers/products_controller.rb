@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  
+  before_filter :authenticate_user!
 
   def index
     @products = Product.all
@@ -27,17 +29,16 @@ class ProductsController < ApplicationController
   end
 
   def create
-    p params
     @product = Product.new(params[:product])
-    @product.product_category_id = 1
+    @product.user = current_user
     @product.save
-    redirect_to controller: :projects, action: :show, id: @product.project_id
+    redirect_to product_path(@product)
   end
 
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
-    redirect_to action: :index
+    redirect_to products_path
   end
 
 end

@@ -11,46 +11,53 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130321034849) do
+ActiveRecord::Schema.define(:version => 20130426020108) do
 
-  create_table "artisans", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+  create_table "attribute_layers", :force => true do |t|
+    t.string   "label"
+    t.integer  "palette_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
-  add_index "artisans", ["email"], :name => "index_artisans_on_email", :unique => true
-  add_index "artisans", ["reset_password_token"], :name => "index_artisans_on_reset_password_token", :unique => true
-
-  create_table "customers", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+  create_table "attributes", :force => true do |t|
+    t.string   "label"
+    t.integer  "attribute_layer_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "attr_img_file_name"
+    t.string   "attr_img_content_type"
+    t.integer  "attr_img_file_size"
+    t.datetime "attr_img_updated_at"
   end
 
-  add_index "customers", ["email"], :name => "index_customers_on_email", :unique => true
-  add_index "customers", ["reset_password_token"], :name => "index_customers_on_reset_password_token", :unique => true
+  create_table "catalogues", :force => true do |t|
+    t.string   "label"
+    t.text     "description"
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "palette_categories_product_categories", :force => true do |t|
+    t.integer "palette_category_id"
+    t.integer "product_category_id"
+  end
+
+  create_table "palettes", :force => true do |t|
+    t.string   "label"
+    t.integer  "product_category_id"
+    t.integer  "attribute_layer_id"
+    t.integer  "user_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
   create_table "product_categories", :force => true do |t|
     t.string   "label"
+    t.integer  "palette_id"
+    t.integer  "product_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -60,6 +67,8 @@ ActiveRecord::Schema.define(:version => 20130321034849) do
     t.text     "description"
     t.integer  "project_id"
     t.integer  "product_category_id"
+    t.integer  "user_id"
+    t.integer  "catalogue_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
@@ -72,5 +81,25 @@ ActiveRecord::Schema.define(:version => 20130321034849) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "name",                   :default => "", :null => false
+    t.string   "role"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

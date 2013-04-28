@@ -1,15 +1,32 @@
+  <!-- // <script type="text/javascript" src="/inc/jquery.1.8.2.min.js"></script> -->
+  <!-- // <script type="text/javascript" src="/inc/jquery.ui.core.min.js"></script> -->
+<!--   // <script type="text/javascript" src="/inc/jquery.ui.widget.min.js"></script>
+  // <script type="text/javascript" src="/inc/jquery.ui.mouse.min.js"></script>
+  // <script type="text/javascript" src="/inc/jquery.ui.draggable.min.js"></script> -->
+  
+    <!-- wPaint -->
+  <link rel="Stylesheet" type="text/css" href="/wPaint.css" />
+  <script type="text/javascript" src="/wPaint.js"></script>
+
+  <!-- wColorPicker -->
+  <link rel="Stylesheet" type="text/css" href="/inc/wColorPicker.css" />
+  <script type="text/javascript" src="/inc/wColorPicker.js"></script>
       <div class="row span12 bordered" id="design">
+		  
+		
+		  
         <div class="span2" id="pallete">
-
+				<%= simple_form_for @project do |f| %>
+				  <%= f.input :file %>
+				  <%= f.button :submit %>
+				<% end %>
           <div class="menu_ bordered">
-            <select id=attr-select>
-              <option value="1">Patterns</option>
-              <option value="2">Stitch type</option>
-              <option value="3">Mirror Work</option>
-              <option value="4">Button</option>
-            </select>
-
-            <div id=choice1 class=choice>
+			  
+			  <%= select_tag :palette, options_from_collection_for_select(@attribute_layers, :id, :label), include_blank: false, id: 'attr-select' %>
+			
+				<!-- TODO: VIKSIT - Loopover the attributes we get from above selection: JS -->
+				
+            <div id="choice1" class="choice">
               <img src="/pictures/Patterns/pattern1.jpg" _width="90px" class="attr">
               <img src="/pictures/Patterns/pattern3.jpg" _width="90px" class="attr">
               <img src="/pictures/Patterns/pattern4.jpg" _width="90px" class="attr">
@@ -23,7 +40,7 @@
               <img src="/pictures/Patterns/pattern12.jpg" _width="90px" class="attr">
             </div>
 
-            <div id=choice2 class=choice>
+            <div id="choice2" class="choice">
               <img src="/pictures/Stitches/stich1.jpg" _width="90px" class="attr">
               <img src="/pictures/Stitches/stich2.jpg" _width="90px" class="attr">
               <img src="/pictures/Stitches/stich3.jpg" _width="90px" class="attr">
@@ -38,7 +55,7 @@
               <img src="/pictures/Stitches/stich12.jpg" _width="90px" class="attr">
             </div>
 
-            <div id=choice3 class=choice>
+            <div id="choice3" class="choice">
               <img src="/pictures/Mirror Work/m1.jpg" _width="90px" class="attr">
               <img src="/pictures/Mirror Work/m2.jpg" _width="90px" class="attr">
               <img src="/pictures/Mirror Work/m3.jpg" _width="90px" class="attr">
@@ -53,7 +70,7 @@
               <img src="/pictures/Mirror Work/m12.jpg" _width="90px" class="attr">
             </div>
 
-            <div id=choice4 class=choice>
+            <div id="choice4" class="choice">
               <img src="/pictures/Buttons/button1.jpg" _width="90px" class="attr">
               <img src="/pictures/Buttons/button2.jpg" _width="90px" class="attr">
               <img src="/pictures/Buttons/button3.jpg" _width="90px" class="attr">
@@ -69,7 +86,19 @@
           <button class="btn pull-left" id="remove-img">Remove Image</button>
           <button class="btn pull-left" id="switch">Switch User</button>
           
-          <canvas id="canvas"></canvas>
+          <div id="wPaint" style="position:relative; top: 35px; width:700px; height:700px;"></div>
         </div>
-        
       </div> <!-- /row -->
+
+<script>
+
+$("#wPaint").wPaint();
+
+</script>
+
+<style>
+#wPaint {
+  background-image:url(/tshirt.jpg);
+  background-size: 700px 700px;
+}
+</style>

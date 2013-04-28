@@ -1,0 +1,16 @@
+
+
+<%= simple_form_for @product_category, html: { multipart: true } do |f| %>
+  
+  <%= f.input :label %>
+  
+  <%= f.button :submit %>
+  
+<% end %>
+
+<style>
+textarea, input {
+    max-height: 200px;
+    width: 400px;
+}
+</style>

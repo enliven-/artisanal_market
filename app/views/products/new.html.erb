@@ -2,6 +2,7 @@
   <%= f.input :name %>
   <%= f.input :description, as: :text %>
   <%= f.input :project_id,  as: :hidden %>
+  <%= f.association :product_category, collection: ProductCategory.all, value_method: :_id, label_method: :label, include_blank: false  %> 
   <%= f.button :submit %>
 <% end %>
 

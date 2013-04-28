@@ -1,0 +1,11 @@
+<h1>New attribute</h1>
+
+
+<%= simple_form_for @attribute, :url => attributes_path, :html => { :multipart => true } do |form| %>
+  <%= form.input :label %>
+  <%= form.file_field :attr_img %>
+  <%= form.input :attribute_layer_id, collection: @attribute_layers, value_method: :id, label_method: :label, include_blank: false %>
+  <%= form.button :submit %>
+<% end %>
+
+<%= link_to 'Back', attributes_path %>

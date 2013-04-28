@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Label:</b>
+  <%= @attribute.label %>
+</p>
+
+<p>
+  <b>Attr img:</b>
+  <%= image_tag @attribute.attr_img.url(:thumb) %>
+</p>
+
+<p>
+  <b>Palette</b>
+  <%= @attribute.attribute_layer.palette.label %>
+</p>
+
+<p>
+  <b>Attribute Layer:</b>
+  <%= @attribute.attribute_layer.label %>
+</p>
+
+
+
+
+<%= link_to 'Edit', edit_attribute_path(@attribute) %> |
+<%= link_to 'Back', attributes_path %>

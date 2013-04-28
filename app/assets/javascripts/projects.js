@@ -1,12 +1,17 @@
 
-
 $(function() {
-    console.log("----");
+    console.log("project.js loading!");
 
     $(".attr").draggable({
         helper: "clone"
     });
 
+
+
+    // $(".attr").click(function(event) {
+    //     $(this).attr("id", "img-to-drop");
+    // });
+    
     $("img").css({ 'opacity' : 0.7 })
             .css( "zIndex", 10 );
     $("img").data({
@@ -23,9 +28,8 @@ $(function() {
 
 
     var txtboxid = 1;
+
     var count = 1;
-
-
     $("#canvas").dblclick(event, function() {
         event.preventDefault();
         var pin = $('<img/>', {'src': "/defaultpin.png", 'class': "pin", "id": count, "title": count, "data-toggle": "tooltip", "data-placement": "right"} );
@@ -36,9 +40,11 @@ $(function() {
         $(pin).draggable({ 
             containment: $("#canvas_container"),
             stop: function(event, ui) {
+
                 $(ui.helper).click();
             }
         });
+
 
 
 
@@ -46,8 +52,6 @@ $(function() {
         var maximize = "<span class=maximize>+</span>";
         var close = "<span class=close id=" + txtboxid + ">X</span>";
         var textbox = $("<div class=txt-border id=" + count + "><span class=comment-box-header>Comments for Pin " + count + "</span><div class=comment-history></div><textarea class=txt></textarea>"+ minimize + close + "</div>");
-        
-
         $("#canvas_container").append(textbox);
         $(textbox).css("position", "absolute")
                   .css("bottom", 40)
@@ -62,11 +66,42 @@ $(function() {
 
         });
 
+        $("textarea").droppable({
+
+            over: function(event, ui) { 
+                $(ui.helper).addClass("drop-min");
+                var img_src = $(ui.helper).attr("src");
+                $(this).val("<img class=drop-min src=" + img_src +">");
+                $(this).focus();
+            },
+
+            out: function(event, ui) {
+                $(ui.helper).removeClass("drop-min");
+                $(this).val("");
+            },
+
+            accept: function(event, ui) {
+                return true;
+            },
+
+            drop: function(event, ui) {
+                $(ui.helper).remove();
+                $(this).focus();
+            },
+
+            snap: true,
+
+            greedy: true,
+
+            tolerance: "pointer"
+
+
+        });
+
         count+= 1;
 
         var commentboxes = $(".minimize");
         $.each(commentboxes, function(index, commentbox) {
-            // console.log($(commentbox).closest(".txt-border"));
             var commentbox_id = $(commentbox).closest(".txt-border").attr("id");
             if (commentbox_id == count-1) {
                 maximize_obj($(commentbox));
@@ -80,15 +115,14 @@ $(function() {
 
     });
 
-    $("#canvas_container").bind("click", ".pin", function(event) {
+    $(".pin").live("click", function() {
         $(".selected-pin").removeClass("selected-pin");
-
-        var $pin = $(event.target);
-        $pin.addClass("selected-pin");
-        pin_id = $pin.attr("id");
+        $(this).addClass("selected-pin");
+        var pin_id = $(this).attr("id");
 
         var commentboxes = $(".minimize");
         $.each(commentboxes, function(index, commentbox) {
+            console.log($(commentbox).closest(".txt-border"));
             var commentbox_id = $(commentbox).closest(".txt-border").attr("id");
             if (commentbox_id == pin_id) {
                 maximize_obj($(commentbox));
@@ -105,11 +139,13 @@ $(function() {
 
 
 
-    $("#canvas_container").on("click", ".close", function(event) {
-        var div = $(event.target).closest(".txt-border");
+    $(".close").live("click", function() {
+        var div = $(this).closest(".txt-border");
         var id = div.attr("id");
+        console.log(id);
         div.remove();
         var pin = $("#"+id);
+        console.log(pin);
         $(pin).remove();
         count-=1;
     });
@@ -117,6 +153,7 @@ $(function() {
     var minimize_obj = function(obj) {
         var div = obj.closest(".txt-border");
         var area = obj.parent().find(".txt");
+
         $(area).addClass("minimized");
         $(div).hide();
     };
@@ -125,19 +162,22 @@ $(function() {
     var maximize_obj = function(obj) {
         var div = obj.closest(".txt-border");
         var area = obj.parent().find(".txt");
+
         $(area).removeClass("minimized");
         $(div).show();
     };
 
-    $(".minimize").bind("click", function() {
+    $(".minimize").live("click", function() {
         console.log("here");
+
         minimize_obj($(this));
     });
 
+    $(".maximize").live("click", function() {
 
-    $(".maximize").bind("click", function() {
         maximize_obj($(this));
     });
+
     
 
 
@@ -155,8 +195,7 @@ $(function() {
         }
     });
 
-
-    $('textarea').bind("keypress", function(event) {
+    $('textarea').live("keypress", function(event) {
         var code = event.keyCode ? event.keyCode : event.which;
         if (code==13) {
             event.preventDefault();
@@ -240,6 +279,7 @@ $(function() {
 
                 var zoom = false;
 
+
                 if (result) {
                     var image = $(ui.helper).clone().removeClass("attr").draggable({
                                     start: function( event, ui ) {
@@ -286,8 +326,4 @@ $(function() {
         $("#selected-img").removeAttr("id");
     });
 
-
 });
-
-
-

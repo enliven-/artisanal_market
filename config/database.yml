@@ -1,0 +1,29 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: artisania_development
+  username: postgres
+  password: post123
+  template: template0
+  pool: 5
+  host: localhost
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: artisania_test
+  username: postgres
+  password: post123
+  template: template0
+  pool: 5
+  host: localhost
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: artisania_production
+  username: postgres
+  password: post123
+  template: template0
+  pool: 5
+  host: localhost

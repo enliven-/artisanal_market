@@ -31,7 +31,7 @@
 ._wPaint_handle{float:left; width:10px; height:30px; background: #AFAFAF; border-radius:3px 0 0 3px; cursor:pointer;}
 
 /*** text input ***/
-._wPaint_textInput{position:absolute; border:dotted #0000FF 1px; background:none; margin:0px; padding:0px; outline-width:0; word-wrap:break-word; overflow:hidden;}
+._wPaint_textInput{position:absolute; border:dotted #0000FF 1px; background:gray; margin:0px; padding:0px; outline-width:0; word-wrap:break-word; overflow:hidden; color: black; display: none;}
 /*._wPaint_textHolder{position:absolute; border:dotted #0000FF 1px;}*/
 
 /*** color picker overwrites ***/
@@ -64,7 +64,7 @@
 ._wPaint_ellipse{background-image: url('/images/icon_ellipse.png');}
 ._wPaint_line{background-image: url('/images/icon_line.png');}
 ._wPaint_pencil{background-image: url('/images/icon_pencil.png');}
-._wPaint_text{background-image: url('/images/icon_text.png');}
+/*._wPaint_text{background-image: url('/images/icon_text.png');}*/
 ._wPaint_eraser{background-image: url('/images/icon_eraser.png');}
 ._wPaint_bold{background-image: url('/images/icon_bold.png');}
 ._wPaint_italic{background-image: url('/images/icon_italic.png');}

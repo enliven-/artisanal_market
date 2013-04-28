@@ -19,4 +19,7 @@
     <tr>
         <td>Created At:</td> <td><%=@product.created_at=%></td>
     </tr>
+    <tr>
+      <td><%= image_tag @product.project.img_file.url(:medium) %></td>
+    </tr>
 </table>

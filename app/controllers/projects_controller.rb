@@ -39,7 +39,12 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
-    @project.customer = current_user
+    if current_user.customer?
+      @project.customer = current_user
+    else
+      @project.artisan = current_user
+    end
+
     @project.save
     redirect_to action: :index
   end

@@ -1,8 +1,10 @@
 <%= simple_form_for @catalogue, html: { multipart: true } do |f| %>
   <%= f.input :label %>
   <%= f.input :description, as: :text %>
+  
   <%= f.association :products,
-                    :collection => current_user.products { |p| [p.name, p.id] },
+                    label: "Add Products to this catalogue",
+                    :collection => current_user.products { |p| [p.name, p.id ] },
                     :as => :check_boxes,
                     :selected => @catalogue.products %>
   <%= f.button :submit %>

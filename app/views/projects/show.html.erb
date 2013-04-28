@@ -6,11 +6,8 @@
     <tr>
         <td>Project Description:</td> <td><%=@project.description=%></td>
     </tr>
-	<tr>
-		<%= image_tag @project.file.url %>
-	</tr>
     <tr>
-       <td>Customer:</td> <td><%= @project.customer.name %></td>
+       <td><%= "#{current_user.role}" %> :</td> <td><%=current_user.name %></td>
     </tr>
     <tr>
         <td>Last Updated At:</td> <td><%=@project.updated_at=%>
@@ -22,7 +19,6 @@
 
 <br />
 
-<%= link_to 'New product', new_product_path(project_id: @project.id) %>
 
 <br /><br /><br />
 <h4>Products associated with this Project</h4>
@@ -34,10 +30,16 @@
     <tr>
       <td><%= product.name %></td>
       <td><%= product.description %></td>
+      <td>
+    <%= image_tag @project.img_file.url(:medium) %></td>
       <td><%= link_to 'Show', product %></td>
     </tr>
   <% end %>
 </table>
+<br /><br /><br />
+
+<%= link_to 'New product', new_product_path(project_id: @project.id) %>
+
 
 <br /><br /><br />
 

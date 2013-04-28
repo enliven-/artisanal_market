@@ -4,7 +4,7 @@
   <tr>
     <th>Title</th>
     <th>Summary</th>
-	<th>File</h1>
+	  <th>Owner</h1>
     <th></th>
     <th></th>
     <th></th>
@@ -14,6 +14,8 @@
   <tr>
     <td><%= catalogue.label %></td>
     <td><%= catalogue.description %></td>
+    <td><%= catalogue.user.name %></td>
+
     <td><%= link_to 'Show', catalogue %></td>
     <td><%= link_to 'Edit', edit_catalogue_path(catalogue) %></td>
     <td><%= link_to 'Remove', catalogue, :confirm => 'Are you sure?', :method => :delete %></td>

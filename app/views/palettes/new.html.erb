@@ -19,12 +19,7 @@
   
 <% end %>
 
-<input type="text" id="datadistancetype" />
-<select name="distancetype" id="distancetype">
-      <option value="0">... Select ...</option>
-      <option value="min">Min</option>
-      <option value="max">Max</option>
-  </select>
+
 
 
 <style>
@@ -79,17 +74,7 @@ $(document).ready(function() {
       return false;
     });
 
-$(function()
-  {
-      $("#datadistancetype").blur(function()
-                                    {
-     // alert("Yahoo");
-      var t=$("#datadistancetype").val();
-       alert(t);
-         if(t=="min" || t=="max")
-            $("#distancetype").attr("value",t);
-               });
-  });
+
 
 
 });

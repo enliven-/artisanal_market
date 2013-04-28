@@ -16,10 +16,7 @@
 		
 		  
         <div class="span2" id="pallete">
-				<%= simple_form_for @project do |f| %>
-				  <%= f.input :file %>
-				  <%= f.button :submit %>
-				<% end %>
+
           <div class="menu_ bordered">
 			  
 			  <%= select_tag :palette, options_from_collection_for_select(@attribute_layers, :id, :label), include_blank: false, id: 'attr-select' %>

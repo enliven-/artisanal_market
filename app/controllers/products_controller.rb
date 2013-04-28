@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.project_id = params[:project_id]
+    @product_category = ProductCategory.new
   end
 
   def edit

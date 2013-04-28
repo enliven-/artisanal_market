@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130426020108) do
+ActiveRecord::Schema.define(:version => 20130428163448) do
 
   create_table "attribute_layers", :force => true do |t|
     t.string   "label"
@@ -78,8 +78,12 @@ ActiveRecord::Schema.define(:version => 20130426020108) do
     t.text     "description"
     t.integer  "customer_id"
     t.integer  "artisan_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "img_file_file_name"
+    t.string   "img_file_content_type"
+    t.integer  "img_file_file_size"
+    t.datetime "img_file_updated_at"
   end
 
   create_table "users", :force => true do |t|

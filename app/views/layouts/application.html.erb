@@ -28,11 +28,10 @@
               <li class="active"><a href="#">Home</a></li>
 
       			  <% if user_signed_in? %>
+                <li><%= link_to 'Projects', projects_path %></li>
+                <li><%= link_to 'Catalogues', catalogues_path %></li>
                 <% if current_user.artisan? %>
-                  <li><%= link_to 'Projects', projects_path %></li>
                   <li><%= link_to 'Palettes', palettes_path %></li>
-                  <li><%= link_to 'Catalogues', catalogues_path %></li>
-
                 <% end %>
                 <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %>
       			  <% else %>

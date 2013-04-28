@@ -2,8 +2,14 @@ class CataloguesController < ApplicationController
 
   before_filter :authenticate_user!
 
-  def index 
+  def index
     @catalogues = Catalogue.where("user_id =?", current_user.id)
+    if current_user.customer?
+      @artisans = User.all.select { |user| user.artisan? }
+      @artisans.each do |artisan|
+        @catalogues += artisan.catalogues
+      end
+    end
   end
 
   def show

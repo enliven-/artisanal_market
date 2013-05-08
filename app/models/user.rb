@@ -24,8 +24,11 @@ class User < ActiveRecord::Base
   def artisan?
     true if self.role == ARTISAN
   end
-
-
-
   
+  private
+  
+  def create_catalog
+    
+  end
+ 
 end

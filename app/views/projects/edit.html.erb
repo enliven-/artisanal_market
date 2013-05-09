@@ -64,6 +64,10 @@
 
         </div>
 
+          <button class="btn pull-left" id="save-clear">Save-Clear</button>
+          <button class="btn pull-left" id="restore">Restore</button>
+
+      <div id="container">
         <div class="span9 unselectable" id="canvas_container">
           <button class="btn pull-left" id="reset">Reset</button>
           <button class="btn pull-left" id="remove-img">Remove Image</button>
@@ -74,13 +78,38 @@
           <div id="wPaint"></div>
 
         </div>
+      </div>
+
+      <div id="restoring">
+      12344
+      </div>
 		
         
       </div> <!-- /row -->
   <script>
     $(document).ready(function() {
+      var contained;
+      // $("#wPaint").wPaint();
+      $("#save-clear").click(function(event) {
 
-      $("#wPaint").wPaint();
+        contained =  $("#canvas_container").clone().html();
+        console.log(contained);
+        $("#canvas_container").html("");
+
+        // console.log(contained.html());
+
+
+      });
+
+      $("#restore").click(function(event) {
+        console.log(contained);
+        // console.log(contained.html());
+        $("#canvas_container").html(contained);
+
+      });
+
+
+
 
     });
   </script>

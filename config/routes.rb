@@ -16,6 +16,7 @@ ArtisanMarket::Application.routes.draw do
   resources :projects do
     member do 
       post :attribute_layer
+      post :palette
     end
   end
   resources :product_categories

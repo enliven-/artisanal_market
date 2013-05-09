@@ -46,13 +46,17 @@ class ProjectsController < ApplicationController
     end
 
     @project.save
-    redirect_to action: :index
+    redirect_to palette_project_path(@project)
   end
 
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
     redirect_to action: :index
+  end
+  
+  def palette
+    @project = Project.find(params[:id])
   end
   
   def attribute_layer

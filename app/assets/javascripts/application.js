@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require jqueryui
+//= require wColorPicker
+//= require wPaint
 //= require_tree .

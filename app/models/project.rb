@@ -10,6 +10,7 @@ class Project < ActiveRecord::Base
   
   has_many :products
   has_one :product_category
+  has_one :palette
   
   def artisan_assigned?
     self.artisan_id ? true : false

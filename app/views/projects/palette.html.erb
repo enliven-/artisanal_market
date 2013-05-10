@@ -1,6 +1,6 @@
+<%= simple_form_for @project do |f| %>
+  <%= f.select :palette_id, Palette.all.map { |r| [r.label, r.id] }, include_blank: false  %><br>
+  <%= f.button :submit, "Save and continue" %>
+<% end %>
 
-Here is what you can do next. You can browse the existing palette to attach to your project (if you haven't already) or else create a new palette for the project.
-
-<%= link_to "Explore", palettes_path %> - <%= link_to "Create", new_palette_path %> palette.
-
-Note: To attach a palette, go to project -> edit and choose from existing palette there.
+<%= link_to 'Create Palette', new_palette_path %>

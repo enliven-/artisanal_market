@@ -28,6 +28,10 @@ before_filter :authenticate_user!
     @palette = Palette.new(params[:palette])
     @palette.user = current_user
     @palette.save
+    if session[:project_id]
+      Project.find(session[:project_id]).update_attribute :palette_id, @palette.id
+      session.delete(:project_id)
+    end
     redirect_to edit_palette_path(@palette)
   end
 

@@ -7,16 +7,8 @@
                     collection: ProductCategory.all, 
                     value_method: :_id, 
                     label_method: :label %>
-  <%= f.button :submit, "Save and continue" %>
+  <%= f.button :submit, "Create" %>
 
-<% end %>
-
-<%= simple_form_for @product_category, html: { multipart: true }, defaults: { input_html: { class: 'product_category' } } do |f| %>
-  
-  <%= f.input  :label, input_html: { class: "category_value" } %>
-  <%= f.button :submit, id: "create_category" %>
-
-  
 <% end %>
 
 

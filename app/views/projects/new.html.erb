@@ -2,31 +2,8 @@
   <%= f.input :name %>
   <%= f.input :description, as: :text %>
   <%= f.file_field :img_file %><br><br>
-  <%= f.association :product_category, collection: ProductCategory.all, value_method: :_id, label_method: :label  %>
-  <%= f.association :palette, collection: current_user.palettes, value_method: :_id, label_method: :label  %> 
   <%= f.button :submit, "Save and continue" %>
 <% end %>
-
-<div class="modal hide fade">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
-  </div>
-  <div class="modal-body">
-	  <%= simple_form_for @product_category, remote: true do |f| %>
-  
-	    <%= f.input :label %>
-  
-	    <%= f.button :submit %>
-  
-	  <% end %>
-
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn">Close</a>
-    <a href="#" class="btn btn-primary">Save changes</a>
-  </div>
-</div>
 
 <style>
 textarea, input {

@@ -1,0 +1,6 @@
+<%= simple_form_for @project do |f| %>
+  <%= f.select :product_category_id, ProductCategory.all.map { |r| [r.label, r.id] }, include_blank: false  %><br>
+  <%= f.button :submit, "Save and continue" %>
+<% end %>
+
+<%= link_to 'Create Category', new_product_category_path %>

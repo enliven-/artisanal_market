@@ -13728,175 +13728,253 @@ break;case 34:t.datepicker._adjustDate(e.target,e.ctrlKey?+t.datepicker._get(o,"
 
 
 }).call(this);
-console.log("loading projects.js");
+// console.log("loading projects.js");
 
 
-$(document).ready(function() {
+// $(document).ready(function() {
 
-    var count = 1;
-    var user  = "Customer";
+//     var count = 1;
+//     var user  = "Customer";
 
-    $(".attr").draggable({
-        helper: "clone"
-    });
-
-
-    $("img").css({ 'opacity' : 0.7 })
-            .css( "zIndex", 10 );
+//     $(".attr").draggable({
+//         helper: "clone"
+//     });
 
 
-    $("img").data({
-        'originalLeft': $("img").css('left'),
-        'origionalTop': $("img").css('top')
-    });
+//     $("img").css({ 'opacity' : 0.7 })
+//             .css( "zIndex", 10 );
+
+
+//     $("img").data({
+//         'originalLeft': $("img").css('left'),
+//         'origionalTop': $("img").css('top')
+//     });
 
 
 
-    $("#canvas").dblclick(event, function() {
+//     $("#canvas").dblclick(event, function() {
         
-        add_new_pin(count);
-        add_new_comment_box(count);
-        count+=1;
+//         var new_pin = make_new_pin(count);
+//         $("#canvas_container").append(new_pin);
 
-    });
+//         var new_commentbox = make_new_comment_box(count);
+//         $("#canvas_container").append(new_commentbox);
 
+//         count+=1;
 
-
-    $("#canvas_container").on("click", ".close", function(event) {
-        var div = $(event.target).closest(".comment-box");
-        var id = div.attr("id");
-        var pin = $("#"+id);
-        pin.remove();
-        div.remove();
-        count-=1;
-    });
-
-    $("#canvas_container").on("keypress", "textarea", function(event) {        
-        var code = event.keyCode ? event.keyCode : event.which;
-        if (code==13) {
-            event.preventDefault();
-            var comment_history = $(this).parent().find('.comment-history');
-            var comment = $(this).val();
-
-            if (comment.trim()!="") {
-                comment_history.append(user + ": " + comment + "<br />");
-            }
-            $(this).val("").focus();
-        }
-    });
-
-    $("#canvas_container").on("click", ".minimize", function(event) {
-        minimize_obj($(this));
-    });
+//     });
 
 
-    $("#canvas_container").on("click", ".maximize", function(event) {
-        maximize_obj($(this));
-    });
+
+//     $("#canvas_container").on("click", ".close", function(event) {
+//         var div = $(event.target).closest(".comment-box");
+//         var id = div.attr("id");
+//         var pin = $("#"+id);
+//         pin.remove();
+//         div.remove();
+//         count-=1;
+//     });
+
+
+
+//     $("#canvas_container").on("keypress", "textarea", function(event) {        
+//         var code = event.keyCode ? event.keyCode : event.which;
+//         if (code==13) {
+//             event.preventDefault();
+//             var comment_history = $(this).parent().find('.comment-history');
+//             var comment = $(this).val();
+
+//             if (comment.trim()!="") {
+//                 comment_history.append(user + ": " + comment + "<br />");
+//             }
+//             $(this).val("").focus();
+//         }
+//     });
+
+//     $("#canvas_container").on("click", ".minimize", function(event) {
+//         minimize_obj($(this));
+//     });
+
+
+//     $("#canvas_container").on("click", ".maximize", function(event) {
+//         maximize_obj($(this));
+//     });
 
     
-    $("#canvas_container").on("click", ".pin", function(event) {
-        $(".selected-pin").removeClass("selected-pin");
-        var pin = $(event.target);
-        pin.addClass("selected-pin");
-        pin_id = pin.attr("id");
+//     $("#canvas_container").on("click", ".pin", function(event) {
+//         console.log("in pin");
+//         $("textarea").focus();
 
-        var commentboxes = $(".minimize");
-        $.each(commentboxes, function(index, commentbox) {
-            var commentbox_id = $(commentbox).closest(".comment-box").attr("id");
-            if (commentbox_id == pin_id) {
-                maximize_obj($(commentbox));
-            } else {
-                minimize_obj($(commentbox));
-            }
-            $("textarea").focus();
-        });
-    });
+//         $(".selected-pin").removeClass("selected-pin");
+//         var pin = $(event.target);
+//         pin.addClass("selected-pin");
+//         pin_id = pin.attr("id");
 
-
-    $("#canvas_container").droppable({
-        drop: function(event, ui) {
-            console.log("droping");
-            var image = clone_attr_image($(ui.helper));
-            $(this).append(image);
-        }
-    });
+//         var commentboxes = $(".minimize");
+//         $.each(commentboxes, function(index, commentbox) {
+//             var commentbox_id = $(commentbox).closest(".comment-box").attr("id");
+//             if (commentbox_id == pin_id) {
+//                 maximize_obj($(commentbox));
+//             } else {
+//                 minimize_obj($(commentbox));
+//             }
+//             $("textarea").focus();
+//         });
+//     });
 
 
-
-
-// ------------------------------------------------------------------------------------------------------
+//     $("#canvas_container").droppable({
+//         drop: function(event, ui) {
+//             console.log("droping");
+//             var image = clone_attr_image($(ui.helper));
+//             $(this).append(image);
+//         }
+//     });
 
 
 
-    var add_new_pin = function(count) {
+
+// // ------------------------------------------------------------------------------------------------------
+
+
+
+//     var make_new_pin = function(count) {
         
-        var pin = $('<img/>', {'src': "/defaultpin.png", 'class': "pin", "id": count, "title": count, "data-toggle": "tooltip", "data-placement": "right"} );
+//         var pin = $('<img/>', {'src': "/defaultpin.png", 'class': "pin", "id": count, "title": count, "data-toggle": "tooltip", "data-placement": "right"} );
         
-        pin .css("position", "absolute")
-            .css("top",  event.y)
-            .css("left", event.x);
+//         pin .css("position", "absolute")
+//             .css("top",  event.y)
+//             .css("left", event.x);
         
-        pin.draggable({ 
-            containment: $("#canvas_container"),
-            stop: function(event, ui) {
-                $(ui.helper).click();
-            }
-        });
+//         pin.draggable({ 
+//             containment: $("#canvas_container"),
+//             stop: function(event, ui) {
+//                 $(ui.helper).click();
+//             }
+//         });
 
-        $("#canvas_container").append(pin);
+//         return pin;
 
-    }
+//     }
 
 
 
-    var add_new_comment_box = function(count) {
+//     var make_new_comment_box = function(count) {
 
-        var minimize = "<span class=minimize>-</span>";
-        var maximize = "<span class=maximize>+</span>";
-        var close = "<span class=close id=" + count + ">X</span>";
-        var textbox = $("<div class=comment-box id=" + count + "><span class=comment-box-header>Comments for Pin " + count + "</span><div class=comment-history></div><textarea class=txt></textarea>"+ minimize + close + "</div>");
+//         var minimize = "<span class=minimize>-</span>";
+//         var maximize = "<span class=maximize>+</span>";
+//         var close = "<span class=close id=" + count + ">X</span>";
         
-        $(textbox).css("position", "absolute")
-                  .css("bottom", 40)
-                  .css("right", "60px");
-
-        $("#canvas_container").append(textbox);
-
-    }
+//         var commentbox = $("<div class=comm--ent-box id=" + count + "><span class=comment-box-header>Comments for Pin " + count + "</span><div class=comment-history></div><textarea class=tsxt id=" + count + ">kjlkj</textarea>"+ minimize + close + "</div>");
+        
+//         $(commentbox).css("position", "absolute")
+//                      .css("bottom", 40)
+//                      .css("right", "60px");
 
 
+//         return commentbox;
 
-    var minimize_obj = function(obj) {
-        var div = obj.closest(".comment-box");
-        $(div).hide();
-    };
+//     }
+
+//     $("textarea").droppable({
+
+//         over: function(event, ui) { 
+//             $(ui.helper).addClass("drop-min");
+//             var img_src = $(ui.helper).attr("src");
+//             $(this).val("<img class=drop-min src=" + img_src +">");
+//             $(this).focus();
+//         },
+
+//         out: function(event, ui) {
+//             $(ui.helper).removeClass("drop-min");
+//             $(this).val("");
+//         },
+
+//         accept: function(event, ui) {
+//             return true;
+//         },
+
+//         drop: function(event, ui) {
+//             $(ui.helper).remove();
+//             $(this).focus();
+//         },
+
+//         snap: true,
+
+//         greedy: true,
+
+//         tolerance: "pointer"
+
+//     });
+//     // var make_textarea_droppable = function(commentbox_obj) {
+
+//     //     var textarea = commentbox_obj.find("textarea");
+
+//     //     textarea.droppable({
+
+//     //         over: function(event, ui) { 
+//     //             $(ui.helper).addClass("drop-min");
+//     //             var img_src = $(ui.helper).attr("src");
+//     //             $(this).val("<img class=drop-min src=" + img_src +">");
+//     //             $(this).focus();
+//     //         },
+
+//     //         out: function(event, ui) {
+//     //             $(ui.helper).removeClass("drop-min");
+//     //             $(this).val("");
+//     //         },
+
+//     //         accept: function(event, ui) {
+//     //             return true;
+//     //         },
+
+//     //         drop: function(event, ui) {
+//     //             $(ui.helper).remove();
+//     //             $(this).focus();
+//     //         },
+
+//     //         snap: true,
+
+//     //         greedy: true,
+
+//     //         tolerance: "pointer"
+
+//     //     });
+
+//     // }
 
 
-    var maximize_obj = function(obj) {
-        var div = obj.closest(".comment-box");
-        $(div).show();
-    };
+
+//     var minimize_obj = function(obj) {
+//         var div = obj.closest(".comment-box");
+//         $(div).hide();
+//     };
+
+
+//     var maximize_obj = function(obj) {
+//         var div = obj.closest(".comment-box");
+//         $(div).show();
+//     };
 
 
 
 
-    var clone_attr_image = function(obj) {
+//     var clone_attr_image = function(obj) {
 
-        if (obj.hasClass("dropped-attr")) {
-            return obj;
-        }
+//         if (obj.hasClass("dropped-attr")) {
+//             return obj;
+//         }
 
-        var image = obj.clone().removeClass("attr").addClass("dropped-attr");
-        image.draggable({
-            containment: $("#canvas_container")
-        });
+//         var image = obj.clone().removeClass("attr").addClass("dropped-attr");
+//         image.draggable({
+//             containment: $("#canvas_container")
+//         });
 
-        return image;
-    }
+//         return image;
+//     }
 
 
-});
+// });
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //

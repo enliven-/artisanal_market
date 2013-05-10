@@ -12,7 +12,7 @@ gem 'simple_form',          "~> 2.1.0"
 gem "faker",                "~> 1.1.2"
 gem "twitter-bootstrap-rails"
 gem 'jquery-ui-rails'
-
+gem 'nested_form'
 gem 'devise'
 gem "paperclip", "~> 3.0"
 

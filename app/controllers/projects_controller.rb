@@ -44,9 +44,19 @@ class ProjectsController < ApplicationController
     else
       @project.artisan = current_user
     end
-
-    @project.save
-    redirect_to palette_project_path(@project)
+    if @project.save
+      if @project.palette_id.nil?
+        session[:project_id] = @project.id
+        redirect_to new_palette_path
+      elsif @project.product_category_id.nil?
+        session[:project_id] = @project.id
+        redirect_to new_product_category_path
+      else
+        redirect_to projects_path
+      end
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -56,7 +66,11 @@ class ProjectsController < ApplicationController
   end
   
   def palette
-    @project = Project.find(params[:id])
+    @project = Project.find(session[:project_id])
+  end
+  
+  def palette
+    @project = Project.find(session[:project_id])
   end
   
   def attribute_layer

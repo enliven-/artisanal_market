@@ -125,6 +125,7 @@ GEM
       metaclass (~> 0.0.1)
     multi_json (1.7.2)
     mysql2 (0.3.11)
+    nested_form (0.3.2)
     nokogiri (1.5.9)
     orm_adapter (0.4.0)
     paperclip (3.4.1)
@@ -244,6 +245,7 @@ DEPENDENCIES
   launchy
   less-rails
   mysql2
+  nested_form
   paperclip (~> 3.0)
   pg
   rails (= 3.2.13)

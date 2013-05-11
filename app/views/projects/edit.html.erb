@@ -12,16 +12,17 @@
   <link rel="Stylesheet" type="text/css" href="/inc/wColorPicker.css" />
   <script type="text/javascript" src="/inc/wColorPicker.js"></script>
       <div class="row span12 bordered" id="design">
-		  
-		
-		  
+          
+        
+          
         <div class="span2" id="pallete">
 
           <div class="menu_ bordered">
-			  
-			  <%= select_tag :palette, options_from_collection_for_select(@attribute_layers, :id, :label), include_blank: false, id: 'attr-select' %>
-			
-				
+              
+              <%= select_tag :palette, options_from_collection_for_select(@attribute_layers, :id, :label), include_blank: false, id: 'attr-select' %>
+            
+                <!-- TODO: VIKSIT - Loopover the attributes we get from above selection: JS -->
+                
             <div id="choice1" class="choice">
               <img src="/pictures/Patterns/pattern1.jpg" _width="90px" class="attr">
               <img src="/pictures/Patterns/pattern3.jpg" _width="90px" class="attr">
@@ -76,72 +77,40 @@
           </div>
 
         </div>
-
-          <button class="btn pull-left" id="save-clear">Save-Clear</button>
+          <button class="btn pull-left" id="save-clear">Clear</button>
           <button class="btn pull-left" id="restore">Restore</button>
-
-      <div id="container">
-        <div class="span9 unselectable" id="canvas_container">
-          <button class="btn pull-left" id="reset">Reset</button>
-          <button class="btn pull-left" id="remove-img">Remove Image</button>
-          <button class="btn pull-left" id="switch">Switch User</button>
-          
-
-<!--           <div id="wPaint" style="position:relative; top: 35px; width:700px; height:700px;"></div>
-        </div>
-      </div> --> <!-- /row -->
+          <button class="btn pull-left" id="save-version">Save Version</button>
 
 
-
-          <canvas id="canvas"></canvas>
-          <div id="wPaint"></div>
-
-        </div>
-      </div>
-
-      <div id="restoring">
-      12344
-      </div>
-		
+          <%= render :partial => "design_partial" %>
         
-    </div> <!-- /row -->
+      </div> <!-- /row -->
 
-<style>
-#_wPaint {
-  background-image:url(/tshirt.jpg);
-  background-size: 700px 700px;
-}
-</style>
-
-
-  <script>
-
+<script>
 
 console.log("loading projects.js");
 
 
 $(document).ready(function() {
 
-    // $("#wPaint").wPaint();
-      var contained;
-      $("#save-clear").click(function(event) {
-
-        contained =  $("#canvas_container").clone().html();
-        console.log(contained);
-        $("#canvas_container").html("");
-
-        // console.log(contained.html());
+    var contained;
+    $("#save-clear").click(function(event) {
+        contained =  $("#wrapper_container").clone().html();
+        $("#wrapper_container").html("");
+    });
 
 
-      });
+    $("#restore").click(function(event) {
+        $("#wrapper_container").html(contained);
+    });
 
-      $("#restore").click(function(event) {
-        console.log(contained);
-        // console.log(contained.html());
-        $("#canvas_container").html(contained);
 
-      });
 
+    $("#save-version").click(function(event) {
+        
+    });
+
+// --------------------------------------------------------------------------------------
     var count = 1;
     var user  = "Customer";
 
@@ -151,7 +120,6 @@ $(document).ready(function() {
 
 
     $("img").css({ 'opacity' : 0.7, 'zIndex': 10 });
-            // .css( "zIndex", 10 );
 
 
     $("img").data({
@@ -369,3 +337,12 @@ $(document).ready(function() {
     width: 40px;
 }
   </style>
+
+
+
+<style>
+#wPaint {
+  background-image:url(/tshirt.jpg);
+  background-size: 700px 700px;
+}
+</style>

@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20130508040909) do
 
   create_table "attributes", :force => true do |t|
     t.string   "label"
-    t.string   "attr_img"
     t.integer  "attribute_layer_id"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false

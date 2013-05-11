@@ -11,13 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508040909) do
+ActiveRecord::Schema.define(:version => 20130511061243) do
 
   create_table "attribute_layers", :force => true do |t|
     t.string   "label"
-    t.integer  "palette_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "attribute_layers_palettes", :force => true do |t|
+    t.integer "palette_id"
+    t.integer "attribute_layer_id"
   end
 
   create_table "attributes", :force => true do |t|

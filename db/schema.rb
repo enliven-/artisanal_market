@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20130428163448) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "design_versions", :force => true do |t|
+    t.string   "design_html"
+    t.integer  "project_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "palette_categories_product_categories", :force => true do |t|
     t.integer "palette_category_id"
     t.integer "product_category_id"

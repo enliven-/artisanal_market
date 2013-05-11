@@ -25,6 +25,7 @@ ArtisanMarket::Application.routes.draw do
   resources :attribute_layers
   resources :attributes
   resources :catalogues
+  resources :design_versions
 
   root to: 'pages#home'
 

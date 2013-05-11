@@ -1,0 +1,11 @@
+<h1>New design_version</h1>
+
+<%= simple_form_for @design_version, html: { multipart: true } do |f| %>
+  
+  <%= f.input :design_html %>
+  
+  <%= f.button :submit %>
+  
+<% end %>
+
+<%= link_to 'Back', design_versions_path %>

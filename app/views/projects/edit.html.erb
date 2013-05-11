@@ -77,21 +77,268 @@
           </div>
 
         </div>
+          <button class="btn pull-left" id="save-clear">Clear</button>
+          <button class="btn pull-left" id="restore">Restore</button>
+          <button class="btn pull-left" id="save-version">Save Version</button>
 
-        <div class="span9 unselectable" id="canvas_container">
-          <button class="btn pull-left" id="reset">Reset</button>
-          <button class="btn pull-left" id="remove-img">Remove Image</button>
-          <button class="btn pull-left" id="switch">Switch User</button>
-          
-          <div id="wPaint" style="position:relative; top: 35px; width:700px; height:700px;"></div>
-        </div>
+
+          <%= render :partial => "design_partial" %>
+        
       </div> <!-- /row -->
 
 <script>
 
-$("#wPaint").wPaint();
+console.log("loading projects.js");
 
-</script>
+
+$(document).ready(function() {
+
+    var contained;
+    $("#save-clear").click(function(event) {
+        contained =  $("#inner_container").clone().html();
+        $("#inner_container").html("");
+    });
+
+
+    $("#restore").click(function(event) {
+        $("#inner_container").html(contained);
+    });
+
+
+
+    $("#save-version").click(function(event) {
+        
+    });
+
+// --------------------------------------------------------------------------------------
+    var count = 1;
+    var user  = "Customer";
+
+    $(".attr").draggable({
+        helper: "clone"
+    });
+
+
+    $("img").css({ 'opacity' : 0.7, 'zIndex': 10 });
+
+
+    $("img").data({
+        'originalLeft': $("img").css('left'),
+        'origionalTop': $("img").css('top')
+    });
+
+
+
+    $("#canvas").dblclick(event, function() {
+        
+        var new_pin = make_new_pin(count);
+        $("#canvas_container").append(new_pin);
+
+        var new_commentbox = make_new_comment_box(count);
+        $("#canvas_container").append(new_commentbox);
+
+        count+=1;
+
+    });
+
+
+
+    $("#canvas_container").on("click", ".close", function(event) {
+        var div = $(event.target).closest(".comment-box");
+        var id = div.attr("id");
+        var pin = $("#"+id);
+        pin.remove();
+        div.remove();
+        count-=1;
+    });
+
+
+
+    $("#canvas_container").on("keypress", "textarea", function(event) {        
+        var code = event.keyCode ? event.keyCode : event.which;
+        if (code==13) {
+            event.preventDefault();
+            var comment_history = $(this).parent().find('.comment-history');
+            var comment = $(this).val();
+
+            if (comment.trim()!="") {
+                comment_history.append(user + ": " + comment + "<br />");
+            }
+            $(this).val("").focus();
+        }
+    });
+
+    $("#canvas_container").on("click", ".minimize", function(event) {
+        minimize_obj($(this));
+    });
+
+
+    $("#canvas_container").on("click", ".maximize", function(event) {
+        maximize_obj($(this));
+    });
+
+    
+    $("#canvas_container").on("click", ".pin", function(event) {
+
+
+        $(".selected-pin").removeClass("selected-pin");
+        var pin = $(event.target);
+        pin.addClass("selected-pin");
+        pin_id = pin.attr("id");
+        console.log(pin_id);
+        var commentboxes = $(".minimize");
+        $.each(commentboxes, function(index, commentbox) {
+            var commentbox_id = $(commentbox).closest(".comment-box").attr("id");
+            if (commentbox_id != pin_id) {
+                minimize_obj($(commentbox));
+            } else {
+                console.log(commentbox_id + "=" + pin_id);
+                maximize_obj($(commentbox));
+            }
+            $("textarea").focus();
+        });
+    });
+
+
+    $("#canvas_container").droppable({
+        drop: function(event, ui) {
+            console.log("droping");
+            var image = clone_attr_image($(ui.helper));
+            $(this).append(image);
+        }
+    });
+
+
+
+
+// ------------------------------------------------------------------------------------------------------
+
+
+
+    var make_new_pin = function(count) {
+        
+        var pin = $('<img/>', {'src': "/defaultpin.png", 'class': "pin", "id": count, "title": count, "data-toggle": "tooltip", "data-placement": "right"} );
+        
+        pin .css("position", "absolute")
+            .css("top",  event.y)
+            .css("left", event.x);
+        
+        pin.draggable({ 
+            containment: $("#canvas_container"),
+            stop: function(event, ui) {
+                $(ui.helper).click();
+            }
+        });
+
+        return pin;
+
+    }
+
+
+
+    var make_new_comment_box = function(count) {
+
+        var minimize = "<span class=minimize>-</span>";
+        var maximize = "<span class=maximize>+</span>";
+        var close = "<span class=close id=" + count + ">X</span>";
+        
+        var commentbox = $("<div class=comment-box id=" + count + "><span class=comment-box-header>Comments for Pin " + count + "</span><div class=comment-history></div><textarea class=txt id=" + count + "></textarea>"+ minimize + close + "</div>");
+        
+        $(commentbox).css("position", "absolute")
+                     .css("bottom", 40)
+                     .css("right", "60px");
+
+        make_textarea_droppable(commentbox);
+
+        return commentbox;
+
+    }
+
+
+    var minimize_obj = function(obj) {
+        // var div = obj.closest(".comment-box");
+        // console.log(div);
+        // // $(div).hide();
+        // $(div).addClass("minimized");
+        var div = obj.closest(".comment-box");
+        var area = obj.parent().find(".txt");
+        $(area).addClass("minimized");
+        $(div).hide();
+    };
+
+
+    var maximize_obj = function(obj) {
+        // var div = obj.closest(".comment-box");
+        // // $(div).show();
+        // $(div).removeClass("minimized");
+        var div = obj.closest(".comment-box");
+        var area = obj.parent().find(".txt");
+        $(area).removeClass("minimized");
+        $(div).show();
+    };
+
+
+    var clone_attr_image = function(obj) {
+
+        if (obj.hasClass("dropped-attr")) {
+            return obj;
+        }
+
+        var image = obj.clone().removeClass("attr").addClass("dropped-attr");
+        image.draggable({
+            containment: $("#canvas_container")
+        });
+
+        return image;
+    }
+
+    var make_textarea_droppable = function(commentbox_obj) {
+
+        var textarea = commentbox_obj.find("textarea");
+
+        textarea.droppable({
+
+            over: function(event, ui) { 
+                $(ui.helper).addClass("drop-min");
+                var img_src = $(ui.helper).attr("src");
+                $(this).val("<img class=drop-min src=" + img_src +">");
+                $(this).focus();
+            },
+
+            out: function(event, ui) {
+                $(ui.helper).removeClass("drop-min");
+                $(this).val("");
+            },
+
+            accept: function(event, ui) {
+                return true;
+            },
+
+            drop: function(event, ui) {
+                $(ui.helper).remove();
+                $(this).focus();
+            },
+
+            snap: true,
+
+            greedy: true,
+
+            tolerance: "pointer"
+
+        });
+
+    }
+});
+  </script>
+
+  <style>
+.drop-min {
+    height: 40px;
+    width: 40px;
+}
+  </style>
+
+
 
 <style>
 #wPaint {

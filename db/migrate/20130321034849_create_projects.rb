@@ -5,6 +5,7 @@ class CreateProjects < ActiveRecord::Migration
       t.text :description
       t.references :customer
       t.references :artisan
+      t.references :design_version
       
       t.timestamps
     end

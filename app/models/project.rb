@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
   belongs_to :artisan,  class_name: 'User'
   
   has_many :products
+  has_many :design_versions
   
   def artisan_assigned?
     self.artisan_id ? true : false

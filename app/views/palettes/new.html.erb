@@ -1,13 +1,16 @@
 
 
-<%= simple_form_for @palette, html: { multipart: true } do |f| %>
+<%= simple_form_for @palette do |f| %>
   
   <%= f.input :label %>
   <%= f.association :product_category, 
                     collection: ProductCategory.all, 
                     value_method: :_id, 
                     label_method: :label %>
-  <%= f.button :submit, "Create" %>
+  <%= f.label "Attribute Layers"%>
+  <%= f.collection_check_boxes :attribute_layer_ids, AttributeLayer.all, :id, :label %>
+  
+  <%= f.button :submit, "Create and continue" %>
 
 <% end %>
 

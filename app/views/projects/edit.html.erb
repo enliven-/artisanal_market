@@ -82,7 +82,17 @@
           <button class="btn pull-left" id="save-version">Save Version</button>
 
 
-          <%= render :partial => "design_partial" %>
+<div id="wrapper_container">
+  <div class="span9 unselectable" id="canvas_container">
+    <button class="btn pull-left" id="reset">Reset</button>
+    <button class="btn pull-left" id="remove-img">Remove Image</button>
+    <button class="btn pull-left" id="switch">Switch User</button>
+
+    <canvas id="canvas"></canvas>
+    <div id="wPaint"></div>
+
+  </div>
+</div>
         
       </div> <!-- /row -->
 
@@ -95,13 +105,13 @@ $(document).ready(function() {
 
     var contained;
     $("#save-clear").click(function(event) {
-        contained =  $("#wrapper_container").clone().html();
-        $("#wrapper_container").html("");
+        contained =  $("#canvas_container").clone().html();
+        $("#canvas_container").html("");
     });
 
 
     $("#restore").click(function(event) {
-        $("#wrapper_container").html(contained);
+        $("#canvas_container").html(contained);
     });
 
 
@@ -129,7 +139,7 @@ $(document).ready(function() {
 
 
 
-    $("#canvas").dblclick(event, function() {
+    $("#canvas_container").on("dblclick", "#canvas", function(event) {
         
         var new_pin = make_new_pin(count);
         $("#canvas_container").append(new_pin);

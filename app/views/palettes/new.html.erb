@@ -8,7 +8,7 @@
                     value_method: :_id, 
                     label_method: :label %>
   <%= f.label "Attribute Layers"%>
-  <%= f.collection_check_boxes :attribute_layer_ids, AttributeLayer.all, :id, :label %>
+  <%= f.collection_check_boxes :attribute_layer_ids, AttributeLayer.all, :id, :label, item_wrapper_class: 'inline' %>
   
   <%= f.button :submit, "Create and continue" %>
 

@@ -20,6 +20,8 @@ class ProductCategoriesController < ApplicationController
  
   def create
     @product_category = ProductCategory.create(params[:product_category])
+    
+    
     if session[:project_id]
       @project = Project.find(session[:project_id])
       @project.update_attribute :product_category_id, @product_category.id

@@ -50,9 +50,7 @@ class ProjectsController < ApplicationController
       @project.artisan = current_user
     end
     if @project.save
-      session[:project_id] = @project.id
-      session[:return_to] ||= request.referer
-      redirect_to category_project_path(@project)
+      render text: @project.inspect
     else
       render :new
     end

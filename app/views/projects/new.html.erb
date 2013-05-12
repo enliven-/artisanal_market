@@ -1,7 +1,14 @@
-<%= simple_form_for @project, url_path: projects_path, html: { multipart: true } do |f| %>
+<%= simple_form_for @project, url_path: projects_path, html: { multipart: true }, remote: true do |f| %>
   <%= f.input :name %>
   <%= f.input :description, as: :text %>
   <%= f.file_field :img_file %><br><br>
+  	<%= f.collection_check_boxes :product_category_ids, ProductCategory.all, :id, :label do |b| 
+                     b.label { b.check_box + ' ' + b.text } 
+                     end  %>
+
+  <%= link_to_add_fields "Add Category", f, :product_categories %><br><br>
+  
+  
   <%= f.button :submit, "Save and continue" %>
 <% end %>
 

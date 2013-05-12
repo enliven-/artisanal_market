@@ -19,6 +19,9 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+    session[:project_id] = @project.id
+    session[:counter] = @project.design_versions.all.size
+
     if @project.artisan_assigned?
       @attribute_layers = User.find(@project.artisan_id).palettes.first.attribute_layers
       @attribute = []
@@ -51,6 +54,7 @@ class ProjectsController < ApplicationController
     end
     if @project.save
       session[:project_id] = @project.id
+      session[:counter] = 0
       session[:return_to] ||= request.referer
       redirect_to category_project_path(@project)
     else

@@ -11,10 +11,10 @@
   <!-- wColorPicker -->
   <link rel="Stylesheet" type="text/css" href="/inc/wColorPicker.css" />
   <script type="text/javascript" src="/inc/wColorPicker.js"></script>
-      <div class="row span12 bordered" id="design">
+    <div class="row span12 bordered" id="design">
           
         
-          
+      <div id="design-wrapper">  
         <div class="span2" id="pallete">
 
           <div class="menu_ bordered">
@@ -77,24 +77,26 @@
           </div>
 
         </div>
-          <button class="btn pull-left" id="save-clear">Clear</button>
+        <div id="controls">
+          <button class="btn pull-left" id="save">Save</button>
           <button class="btn pull-left" id="restore">Restore</button>
-          <button class="btn pull-left" id="save-version">Save Version</button>
+          <button class="btn pull-left" id="prev-version">Previous Version</button>
+          <button class="btn pull-left" id="next-version">Next Version</button>
+        </div>
 
+        <div id="wrapper_container">
+          <div class="span9 unselectable" id="canvas_container">
+            <button class="btn pull-left" id="reset">Reset</button>
+            <button class="btn pull-left" id="remove-img">Remove Image</button>
+            <button class="btn pull-left" id="switch">Switch User</button>
 
-<div id="wrapper_container">
-  <div class="span9 unselectable" id="canvas_container">
-    <button class="btn pull-left" id="reset">Reset</button>
-    <button class="btn pull-left" id="remove-img">Remove Image</button>
-    <button class="btn pull-left" id="switch">Switch User</button>
+            <canvas id="canvas"></canvas>
+            <div id="wPaint"></div>
 
-    <canvas id="canvas"></canvas>
-    <div id="wPaint"></div>
-
-  </div>
-</div>
-        
-      </div> <!-- /row -->
+          </div>
+        </div>
+      </div>    
+    </div> <!-- /row -->
 
 <script>
 
@@ -104,20 +106,89 @@ console.log("loading projects.js");
 $(document).ready(function() {
 
     var contained;
-    $("#save-clear").click(function(event) {
+
+
+    $("#save").click(function(event) {
         contained =  $("#canvas_container").clone().html();
-        $("#canvas_container").html("");
+        var params = { 'design_html' : contained };
+        $.ajax({
+            type: 'POST',
+            url: '/design_versions/',
+            data: params,
+            success: function(data) {
+                $("#canvas_container").html("");
+            }
+        });
     });
 
 
     $("#restore").click(function(event) {
-        $("#canvas_container").html(contained);
+        // $("#canvas_container").html(contained);
+        $.ajax({
+            type: 'GET',
+            url: '/design_versions/',
+            // data: params,
+            success: function(data) {
+                console.log(data);
+                $("#canvas_container").html(data);
+                var commentboxes = $(".comment-box");
+                $.each(commentboxes, function(index, commentbox) {
+                    make_textarea_droppable($(commentbox));
+                });
+                $(".dropped-attr").draggable({'containment': $("#canvas_container") });
+                $("#save").removeAttr("disabled");
+                $("#canvas_container").css({'opacity' : 1});
+
+
+            }
+        });
     });
 
+    $("#prev-version").click(function(event) {
+        // $("#canvas_container").html(contained);
+        var params = { 'prev' : true };
+        $.ajax({
+            type: 'GET',
+            url: '/design_versions/',
+            data: params,
+            success: function(data) {
+                // alert("data");
+                // console.log(data);
+                $("#canvas_container").html(data);
+                var commentboxes = $(".comment-box");
+                $.each(commentboxes, function(index, commentbox) {
+                    make_textarea_droppable($(commentbox));
+                });
+                $(".dropped-attr").draggable({'containment': $("#canvas_container") });
+                $("#save").attr("disabled", "disabled");
+                $("#canvas_container").css({'opacity' : .5});
+                // $("#controls").css({'opacity' : 1});
 
+            }
+        });
+    });
 
-    $("#save-version").click(function(event) {
-        
+    $("#next-version").click(function(event) {
+        var params = { 'next' : true };
+        $.ajax({
+            type: 'GET',
+            url: '/design_versions/',
+            data: params,
+            success: function(data) {
+                // alert("data");
+                // console.log(data);
+                $("#canvas_container").html(data);
+                var commentboxes = $(".comment-box");
+                $.each(commentboxes, function(index, commentbox) {
+                    make_textarea_droppable($(commentbox));
+                });
+                $(".dropped-attr").draggable({'containment': $("#canvas_container") });
+                $("#save").attr("disabled", "disabled");
+                $("#canvas_container").css({'opacity' : .5});
+                // $("#controls").css({'opacity' : 1});
+
+            }
+        });
     });
 
 // --------------------------------------------------------------------------------------
@@ -146,6 +217,8 @@ $(document).ready(function() {
 
         var new_commentbox = make_new_comment_box(count);
         $("#canvas_container").append(new_commentbox);
+        make_textarea_droppable(new_commentbox);
+
 
         count+=1;
 
@@ -219,7 +292,9 @@ $(document).ready(function() {
     });
 
 
-
+    // $(".dropped-attr").draggable({
+    //     containment: $("#canvas_container")
+    // });
 
 // ------------------------------------------------------------------------------------------------------
 
@@ -258,8 +333,6 @@ $(document).ready(function() {
                      .css("bottom", 40)
                      .css("right", "60px");
 
-        make_textarea_droppable(commentbox);
-
         return commentbox;
 
     }
@@ -295,9 +368,9 @@ $(document).ready(function() {
         }
 
         var image = obj.clone().removeClass("attr").addClass("dropped-attr");
-        image.draggable({
-            containment: $("#canvas_container")
-        });
+        // image.draggable({
+        //     containment: $("#canvas_container")
+        // });
 
         return image;
     }

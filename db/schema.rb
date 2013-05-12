@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20130510235539) do
+ActiveRecord::Schema.define(:version => 20130511194528) do
 
   create_table "attribute_layers", :force => true do |t|
     t.string   "label"
@@ -46,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20130510235539) do
   end
 
   create_table "design_versions", :force => true do |t|
-    t.string   "design_html"
+    t.text     "design_html"
     t.integer  "project_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -91,14 +90,15 @@ ActiveRecord::Schema.define(:version => 20130510235539) do
     t.integer  "customer_id"
     t.integer  "artisan_id"
     t.integer  "design_version_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.string   "img_file_file_name"
     t.string   "img_file_content_type"
     t.integer  "img_file_file_size"
     t.datetime "img_file_updated_at"
     t.integer  "product_category_id"
     t.integer  "palette_id"
+    t.integer  "design_versions_count", :default => 0
   end
 
   create_table "users", :force => true do |t|

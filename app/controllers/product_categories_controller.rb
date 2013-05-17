@@ -19,11 +19,16 @@ class ProductCategoriesController < ApplicationController
   end
  
   def create
-    @product_category = ProductCategory.create(params[:product_category])
+    @product_category = ProductCategory.new(params[:product_category])
+    @product_category.save
+    p @product_category
+    puts "-------------------------------------------"
     if session[:project_id]
       @project = Project.find(session[:project_id])
-      @project.update_attribute :product_category_id, @product_category.id
-      redirect_to palette_project_path(@project)
+      # @project.update_attribute :product_category_id, @product_category.id
+      # redirect_to palette_project_path(@project)
+      puts "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx"
+      redirect_to new_pallete_path
     else
       product_categories_path
     end

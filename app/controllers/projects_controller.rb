@@ -56,7 +56,8 @@ class ProjectsController < ApplicationController
       session[:project_id] = @project.id
       session[:counter] = 0
       session[:return_to] ||= request.referer
-      redirect_to category_project_path(@project)
+      # redirect_to category_project_path(@project)
+      redirect_to new_product_category_path
     else
       render :new
     end

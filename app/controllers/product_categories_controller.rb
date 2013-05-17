@@ -20,13 +20,14 @@ class ProductCategoriesController < ApplicationController
  
   def create
     @product_category = ProductCategory.create(params[:product_category])
-    if session[:project_id]
-      @project = Project.find(session[:project_id])
-      @project.update_attribute :product_category_id, @product_category.id
-      redirect_to palette_project_path(@project)
-    else
-      product_categories_path
-    end
+    redirect_to action: :index
+    # if session[:project_id]
+    #   @project = Project.find(session[:project_id])
+    #   @project.update_attribute :product_category_id, @product_category.id
+    #   redirect_to palette_project_path(@project)
+    # else
+    #   product_categories_path
+    # end
   end
 
   def destroy

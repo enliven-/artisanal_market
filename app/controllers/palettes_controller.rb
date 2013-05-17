@@ -29,10 +29,10 @@ before_filter :authenticate_user!
     @palette.user = current_user
     @palette.save
     session[:palette_id] = @palette.id
-    if session[:project_id]
-      Project.find(session[:project_id]).update_attribute :palette_id, @palette.id
-      session.delete(:project_id)
-    end
+    # if session[:project_id]
+    #   Project.find(session[:project_id]).update_attribute :palette_id, @palette.id
+    #   session.delete(:project_id)
+    # end
     redirect_to edit_palette_path(@palette)
   end
 

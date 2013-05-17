@@ -34,11 +34,12 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])
-      if session[:project_id]
-        @project.palette_id.nil? ? redirect_to(palette_project_path(@project)) : redirect_to(action: :index)
-      else
-        redirect_to action: :index
-      end
+      # if session[:project_id]
+      #   @project.palette_id.nil? ? redirect_to(palette_project_path(@project)) : redirect_to(action: :index)
+      # else
+      #   redirect_to action: :index
+      # end
+      redirect_to :index
     else
       render :edit
     end
@@ -53,10 +54,19 @@ class ProjectsController < ApplicationController
       @project.artisan = current_user
     end
     if @project.save
-      session[:project_id] = @project.id
-      session[:counter] = 0
-      session[:return_to] ||= request.referer
-      redirect_to category_project_path(@project)
+      # session[:project_id] = @project.id
+      # session[:counter] = 0
+      # session[:return_to] ||= request.referer
+      # redirect_to category_project_path(@project)
+      if @project.palette_id.nil?
+        session[:project_id] = @project.id
+        redirect_to new_palette_path
+      elsif @project.product_category_id.nil?
+        session[:project_id] = @project.id
+        redirect_to new_product_category_path
+      else
+        redirect_to projects_path
+      end
     else
       render :new
     end

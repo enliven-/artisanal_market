@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :description, :name, :artisan_id, :img_file, :product_category_ids, :palette_id, :product_categories_attributes
+  attr_accessible :description, :name, :artisan_id, :img_file, :palette_id, :product_category_id, :product_category_attributes, :palette_attributes
   
   has_attached_file :img_file, :styles => { :large => "600x600>", :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   
@@ -10,16 +10,24 @@ class Project < ActiveRecord::Base
   
   has_many :products
   
-  has_one :palette
+  belongs_to :palette
   
-  has_and_belongs_to_many :product_categories
-  accepts_nested_attributes_for :product_categories
+  belongs_to :product_category
+  accepts_nested_attributes_for :product_category
   accepts_nested_attributes_for :palette
   
   def artisan_assigned?
     self.artisan_id ? true : false
   end
   
+  def palette_attributes=(attributes)
+    self.palette = Palette.find_or_create_by_label(attributes[:label])
+  end
+  
+  def product_category_attributes=(attributes)
+    self.product_category = ProductCategory.find_or_create_by_label(attributes[:label])
+  end
+
   private
   
   def notify_artisans

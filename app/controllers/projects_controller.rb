@@ -14,7 +14,8 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new()
+    @project = Project.new
+    @project.build_palette
   end
 
   def edit
@@ -52,7 +53,7 @@ class ProjectsController < ApplicationController
     if @project.save
       render text: @project.inspect
     else
-      render :new
+      render text: @project.valid?
     end
   end
 

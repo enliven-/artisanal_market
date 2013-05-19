@@ -3,6 +3,6 @@ class ProductCategory < ActiveRecord::Base
   
   has_many :products
   has_one  :palette
-  has_and_belongs_to_many :projects
+  has_many :projects
 
 end

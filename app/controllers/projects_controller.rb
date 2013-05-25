@@ -14,7 +14,8 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new()
+    @project = Project.new
+    @project.build_palette
   end
 
   def edit
@@ -54,21 +55,25 @@ class ProjectsController < ApplicationController
       @project.artisan = current_user
     end
     if @project.save
-      # session[:project_id] = @project.id
-      # session[:counter] = 0
-      # session[:return_to] ||= request.referer
-      # redirect_to category_project_path(@project)
-      if @project.palette_id.nil?
-        session[:project_id] = @project.id
-        redirect_to new_palette_path
-      elsif @project.product_category_id.nil?
-        session[:project_id] = @project.id
-        redirect_to new_product_category_path
-      else
-        redirect_to projects_path
-      end
+# <<<<<<< HEAD
+#       # session[:project_id] = @project.id
+#       # session[:counter] = 0
+#       # session[:return_to] ||= request.referer
+#       # redirect_to category_project_path(@project)
+#       if @project.palette_id.nil?
+#         session[:project_id] = @project.id
+#         redirect_to new_palette_path
+#       elsif @project.product_category_id.nil?
+#         session[:project_id] = @project.id
+#         redirect_to new_product_category_path
+#       else
+#         redirect_to projects_path
+#       end
+# =======
+      render text: @project.inspect
+# >>>>>>> flow
     else
-      render :new
+      render text: @project.valid?
     end
   end
 

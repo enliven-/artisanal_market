@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(:version => 20130511194528) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "attribute_layers_attributes", :force => true do |t|
+    t.integer "attribute_layer_id"
+    t.integer "attribute_id"
+  end
+
   create_table "attribute_layers_palettes", :force => true do |t|
     t.integer "palette_id"
     t.integer "attribute_layer_id"
@@ -73,6 +78,11 @@ ActiveRecord::Schema.define(:version => 20130511194528) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "product_categories_projects", :force => true do |t|
+    t.integer "project_id"
+    t.integer "product_category_id"
+  end
+
   create_table "products", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -96,9 +106,9 @@ ActiveRecord::Schema.define(:version => 20130511194528) do
     t.string   "img_file_content_type"
     t.integer  "img_file_file_size"
     t.datetime "img_file_updated_at"
-    t.integer  "product_category_id"
     t.integer  "palette_id"
     t.integer  "design_versions_count", :default => 0
+    t.integer  "product_category_id"
   end
 
   create_table "users", :force => true do |t|

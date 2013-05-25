@@ -2,7 +2,21 @@
   <%= f.input :name %>
   <%= f.input :description, as: :text %>
   <%= f.file_field :img_file %><br><br>
-  <%= f.button :submit, "Save and continue" %>
+  <fieldset>
+  <%= f.select :product_category_id, ProductCategory.all.map { |r| [r.label, r.id] }, include_blank: true  %><br>
+  <%= link_to_add_fields "Add Category", f, :product_category %><br><br>
+</fieldset>
+
+  <fieldset>
+	  <%= f.select :palette_id, Palette.all.map { |r| [r.label, r.id] }, include_blank: true  %><br>
+	  <p>or</p>
+    <%= link_to_add_fields "Create Palette", f, :palette %><br><br>
+	  
+	
+  </fieldset>
+  
+  
+  <%= f.button :submit, "Create" %>
 <% end %>
 
 <style>

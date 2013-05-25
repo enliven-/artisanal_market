@@ -1,10 +1,11 @@
 class Palette < ActiveRecord::Base
-  attr_accessible :label, :product_category_id, :attribute_layer_ids
-  validates_presence_of :label, :product_category_id
+  attr_accessible :label, :product_category_id, :attribute_layer_ids, :attribute_layers_attributes
   
   has_and_belongs_to_many :attribute_layers
   belongs_to :user
   belongs_to :product_category
-  belongs_to :project
+  has_many :projects
+  
+  accepts_nested_attributes_for :attribute_layers
 
 end

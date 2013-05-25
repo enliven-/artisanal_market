@@ -1,7 +1,7 @@
 jQuery ->
-  $("a[rel=popover]").popover()
-  $(".tooltip").tooltip()
-  $("a[rel=tooltip]").tooltip()
+  # $("a[rel=popover]").popover()
+  # $(".tooltip").tooltip()
+  # $("a[rel=tooltip]").tooltip()
   
   $('form').on 'click', '.add_fields', (event) ->
 	  alert "I am here"

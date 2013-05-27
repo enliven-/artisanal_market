@@ -3,7 +3,8 @@ class CreateCatalogues < ActiveRecord::Migration
     create_table :catalogues do |t|
       t.string :label
       t.text   :description
-      t.references :user, :product
+
+      t.integer :user_id
 
       t.timestamps
     end

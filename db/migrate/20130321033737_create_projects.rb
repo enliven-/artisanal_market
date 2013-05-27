@@ -3,10 +3,9 @@ class CreateProjects < ActiveRecord::Migration
     create_table :projects do |t|
       t.string :name
       t.text :description
-      t.references :customer
-      t.references :artisan
-      t.references :design_version
-      
+
+      t.integer :artisan_id, :customer_id, :product_category_id
+
       t.timestamps
     end
   end

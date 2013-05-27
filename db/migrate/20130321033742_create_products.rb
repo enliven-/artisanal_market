@@ -3,7 +3,8 @@ class CreateProducts < ActiveRecord::Migration
     create_table :products do |t|
       t.string :name
       t.text :description
-      t.references :project, :product_category, :user, :catalogue
+
+      t.integer :project_id, :product_category_id, :user_id, :catalogue_id
 
       t.timestamps
     end

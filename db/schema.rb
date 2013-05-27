@@ -47,6 +47,11 @@ ActiveRecord::Schema.define(:version => 20130525132622) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "palette_categories_product_categories", :force => true do |t|
+    t.integer "palette_category_id"
+    t.integer "product_category_id"
+  end
+
   create_table "palettes", :force => true do |t|
     t.string   "label"
     t.integer  "product_category_id"

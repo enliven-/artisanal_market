@@ -6,5 +6,8 @@ class CreateDesignVersions < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    add_column :projects, :design_versions_count, :integer, :default => 0
+
   end
 end

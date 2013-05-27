@@ -12,8 +12,6 @@ class ProductsController < ApplicationController
 
   def new
     @product = Product.new
-    @product.project_id = params[:project_id]
-    @product_category = ProductCategory.new
   end
 
   def edit
@@ -32,8 +30,11 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(params[:product])
     @product.user = current_user
-    @product.save
-    redirect_to product_path(@product)
+    if @product.save
+      redirect_to product_path(@product)
+    else
+      render :new
+    end
   end
 
   def destroy

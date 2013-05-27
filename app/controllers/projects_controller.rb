@@ -35,45 +35,20 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])
-      # if session[:project_id]
-      #   @project.palette_id.nil? ? redirect_to(palette_project_path(@project)) : redirect_to(action: :index)
-      # else
-      #   redirect_to action: :index
-      # end
       redirect_to :index
     else
       render :edit
     end
   end
 
-  def create
-    
+  def create   
     @project = Project.new(params[:project])
-    if current_user.customer?
-      @project.customer = current_user
-    else
-      @project.artisan = current_user
-    end
+    current_user.customer? ? @project.customer = current_user : @project.artisan = current_user
+
     if @project.save
-# <<<<<<< HEAD
-#       # session[:project_id] = @project.id
-#       # session[:counter] = 0
-#       # session[:return_to] ||= request.referer
-#       # redirect_to category_project_path(@project)
-#       if @project.palette_id.nil?
-#         session[:project_id] = @project.id
-#         redirect_to new_palette_path
-#       elsif @project.product_category_id.nil?
-#         session[:project_id] = @project.id
-#         redirect_to new_product_category_path
-#       else
-#         redirect_to projects_path
-#       end
-# =======
-      render text: @project.inspect
-# >>>>>>> flow
+      redirect_to product_path(@product)
     else
-      render text: @project.valid?
+      render :new
     end
   end
 

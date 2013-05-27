@@ -1,22 +1,46 @@
-<%= simple_form_for @project, url_path: projects_path, html: { multipart: true } do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description, as: :text %>
-  <%= f.file_field :img_file %><br><br>
-  <fieldset>
-  <%= f.select :product_category_id, ProductCategory.all.map { |r| [r.label, r.id] }, include_blank: true  %><br>
-  <%= link_to_add_fields "Add Category", f, :product_category %><br><br>
-</fieldset>
 
-  <fieldset>
-	  <%= f.select :palette_id, Palette.all.map { |r| [r.label, r.id] }, include_blank: true  %><br>
-	  <p>or</p>
-    <%= link_to_add_fields "Create Palette", f, :palette %><br><br>
-	  
-	
-  </fieldset>
-  
-  
-  <%= f.button :submit, "Create" %>
+
+<%= simple_form_for @project, url_path: projects_path, html: { multipart: true } do |f| %>
+
+  <div id="tabs">
+
+    <ul>
+      <li><a href="#tabs-1">Project</a></li>
+      <li><a href="#tabs-2">Product Category</a></li>
+      <li><a href="#tabs-3">Palette</a></li>
+    </ul>
+    
+    <div id="tabs-1">
+      <%= f.input :name %>
+      <%= f.input :description, as: :text %>
+    </div>
+
+    <div id="tabs-2">
+      Choose a file
+      <%= f.file_field :img_file %> <br>
+      
+      Or createa a new category
+      <%= f.simple_fields_for :product_category do |builder| %>
+        <%= builder.input :label, :label => false, :placeholder => "ProductCategory Label" %>
+      <% end %>
+    </div>
+    
+    <div id="tabs-3">
+
+      Or create a new palette:
+      <%= f.simple_fields_for :palette do |builder| %>
+        <%= render 'palette_fields', f: builder %>
+      <% end %>
+
+
+
+
+      <%= f.button :submit, "Create" %>
+    </div>
+
+
+  </div>
+
 <% end %>
 
 <style>
@@ -25,3 +49,9 @@ textarea, input {
     width: 400px;
 }
 </style>
+
+  <script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+  </script>

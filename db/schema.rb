@@ -48,8 +48,9 @@ ActiveRecord::Schema.define(:version => 20130527075141) do
 
   create_table "palettes", :force => true do |t|
     t.string   "label"
-    t.integer  "product_category_id"
     t.integer  "artisan_id"
+    t.integer  "project_id"
+    t.integer  "product_category_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end

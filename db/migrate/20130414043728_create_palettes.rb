@@ -3,7 +3,7 @@ class CreatePalettes < ActiveRecord::Migration
     create_table :palettes do |t|
       t.string :label
 
-      t.integer :product_category_id, :artisan_id
+      t.integer :artisan_id, :project_id, :product_category_id
 
       t.timestamps
     end

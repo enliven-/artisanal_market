@@ -16,8 +16,8 @@ before_filter :authenticate_user!
 
   def new
     @palette = Palette.new
-    @product_category = ProductCategory.new
-
+    # @product_category = ProductCategory.new
+    # @attribute_layers = @palette.build_attribute_layer
   end
 
   def edit

@@ -15,7 +15,9 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @project.build_palette
+    product_category = @project.build_product_category
+    palette = @project.build_palette
+    attribute_layer = palette.build_attribute_layer
   end
 
   def edit

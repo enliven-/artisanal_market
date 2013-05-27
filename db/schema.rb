@@ -11,27 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519024118) do
+ActiveRecord::Schema.define(:version => 20130525132622) do
 
   create_table "attribute_layers", :force => true do |t|
     t.string   "label"
+    t.integer  "palette_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "attribute_layers_attributes", :force => true do |t|
-    t.integer "attribute_layer_id"
-    t.integer "attribute_id"
-  end
-
-  create_table "attribute_layers_palettes", :force => true do |t|
-    t.integer "palette_id"
-    t.integer "attribute_layer_id"
-  end
-
   create_table "attributes", :force => true do |t|
     t.string   "label"
-    t.string   "attr_img"
     t.integer  "attribute_layer_id"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
@@ -57,11 +47,6 @@ ActiveRecord::Schema.define(:version => 20130519024118) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "palette_categories_product_categories", :force => true do |t|
-    t.integer "palette_category_id"
-    t.integer "product_category_id"
-  end
-
   create_table "palettes", :force => true do |t|
     t.string   "label"
     t.integer  "product_category_id"
@@ -69,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20130519024118) do
     t.integer  "user_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.integer  "project_id"
   end
 
   create_table "product_categories", :force => true do |t|
@@ -77,11 +63,7 @@ ActiveRecord::Schema.define(:version => 20130519024118) do
     t.integer  "product_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "product_categories_projects", :force => true do |t|
-    t.integer "project_id"
-    t.integer "product_category_id"
+    t.integer  "project_id"
   end
 
   create_table "products", :force => true do |t|
@@ -100,15 +82,16 @@ ActiveRecord::Schema.define(:version => 20130519024118) do
     t.text     "description"
     t.integer  "customer_id"
     t.integer  "artisan_id"
+    t.integer  "design_version_id"
     t.datetime "created_at",                           :null => false
     t.datetime "updated_at",                           :null => false
     t.string   "img_file_file_name"
     t.string   "img_file_content_type"
     t.integer  "img_file_file_size"
     t.datetime "img_file_updated_at"
-    t.integer  "palette_id"
-    t.integer  "product_category_id"
     t.integer  "design_versions_count", :default => 0
+    t.integer  "product_category_id"
+    t.integer  "palette_id"
   end
 
   create_table "users", :force => true do |t|

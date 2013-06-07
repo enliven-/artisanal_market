@@ -15,7 +15,7 @@ class Project < ActiveRecord::Base
 
   accepts_nested_attributes_for :product_category
   accepts_nested_attributes_for :palette
-
+# 
 
   def artisan_assigned?
     self.artisan_id ? true : false
